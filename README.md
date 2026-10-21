@@ -16,9 +16,9 @@ published on Printables.
 
 ## Status
 
-- **Last verified**: 2026-10-21 (scaffold)
-- **Models**: none yet
-- **Build check**: `python scripts/check_models.py` exits cleanly with no models
+- **Last verified**: 2026-10-21 (Batch 1)
+- **Models**: 2
+- **Build check**: `python scripts/check_models.py` builds 7 variants with zero warnings
 
 ## Quick start
 

@@ -1,0 +1,21 @@
+{
+  "primary": "OA4_USBC_Door.scad",
+  "defines": {
+    "large": 0,
+    "medium": 0
+  },
+  "variants": {
+    "medium": {
+      "file": "OA4_USBC_Door.scad",
+      "defines": {
+        "medium": 1
+      }
+    },
+    "large": {
+      "file": "OA4_USBC_Door.scad",
+      "defines": {
+        "large": 1
+      }
+    }
+  }
+}

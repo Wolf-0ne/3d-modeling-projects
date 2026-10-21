@@ -1,0 +1,26 @@
+{
+  "primary": "tray_organizer.scad",
+  "defines": {
+    "divisions": 2
+  },
+  "variants": {
+    "div1": {
+      "file": "tray_organizer.scad",
+      "defines": {
+        "divisions": 1
+      }
+    },
+    "div3": {
+      "file": "tray_organizer.scad",
+      "defines": {
+        "divisions": 3
+      }
+    },
+    "div4": {
+      "file": "tray_organizer.scad",
+      "defines": {
+        "divisions": 4
+      }
+    }
+  }
+}
