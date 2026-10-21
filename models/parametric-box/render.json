@@ -1,0 +1,14 @@
+{
+  "primary": "parametric_box.scad",
+  "defines": {
+    "variant": "elongated"
+  },
+  "variants": {
+    "square": {
+      "file": "parametric_box.scad",
+      "defines": {
+        "variant": "square"
+      }
+    }
+  }
+}

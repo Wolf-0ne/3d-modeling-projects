@@ -16,9 +16,9 @@ published on Printables.
 
 ## Status
 
-- **Last verified**: 2026-10-21 (Batch 1)
-- **Models**: 2
-- **Build check**: `python scripts/check_models.py` builds 7 variants with zero warnings
+- **Last verified**: 2026-10-21 (Batch 2)
+- **Models**: 5
+- **Build check**: `python scripts/check_models.py` builds 14 variants with zero warnings
 
 ## Quick start
 

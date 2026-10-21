@@ -1,0 +1,10 @@
+{
+  "primary": "stackable_box.scad",
+  "defines": {},
+  "variants": {
+    "thread_tap": {
+      "file": "thread_tap_box.scad",
+      "defines": {}
+    }
+  }
+}

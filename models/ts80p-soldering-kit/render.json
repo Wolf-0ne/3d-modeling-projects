@@ -1,0 +1,18 @@
+{
+  "primary": "soldering_kit.scad",
+  "defines": {
+    "type": "dual"
+  },
+  "variants": {
+    "single": {
+      "file": "soldering_kit.scad",
+      "defines": {
+        "type": "single"
+      }
+    },
+    "legacy": {
+      "file": "soldering_kit_legacy.scad",
+      "defines": {}
+    }
+  }
+}
