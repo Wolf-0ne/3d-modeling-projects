@@ -11,7 +11,7 @@ model, then generate `img/iso.png` with `render_previews.py`.
 
 - Last verified: YYYY-MM-DD
 - OpenSCAD version: see the root README (single source of truth)
-- Physically tested on: (boards/cards/hardware actually used)
+- Physically tested on: Original Prusa MK3.5S
 
 ## Files
 

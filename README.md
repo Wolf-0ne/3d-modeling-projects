@@ -52,10 +52,9 @@ build/       local STL output, gitignored
 
 ## Models
 
-No model sources have been added yet. Each model directory will contain its
-source, a `render.json`, a model README, and preview images. The index lives in
-[`models/README.md`](models/README.md) and lists only models that are actually
-present and verified.
+Each model directory contains its source, a `render.json`, a model README, and
+preview images. The index lives in [`models/README.md`](models/README.md) and
+lists only models that are actually present and verified.
 
 ## Build and preview
 
@@ -66,11 +65,14 @@ python scripts/check_models.py
 # One model
 python scripts/check_models.py --model drawer-cabinet-organizer
 
-# Preview the primary variant (iso/front/top PNGs)
+# Preview the primary variant (isometric PNG by default)
 python scripts/render_previews.py models/drawer-cabinet-organizer
 
 # Preview every declared variant
 python scripts/render_previews.py models/drawer-cabinet-organizer --all
+
+# Add front and top views when they are useful
+python scripts/render_previews.py models/drawer-cabinet-organizer --views iso,front,top
 ```
 
 `check_models.py` writes STLs to `build/<model>/<variant>.stl`. Local STLs may
@@ -114,6 +116,13 @@ Fonts are **not** covered by this repository's CC BY 4.0 license.
 - printer profiles or personal machine settings
 - third-party fonts
 - compatibility claims that have not been physically tested
+
+## Support
+
+> [!TIP]
+> If you like my work, check out my [Buy Me a Coffee](https://buymeacoffee.com/wolfone_) link.
+>
+> <a href="https://buymeacoffee.com/wolfone_"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="180"></a>
 
 ## Issues
 

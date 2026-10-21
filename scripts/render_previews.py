@@ -4,6 +4,7 @@
 Usage:
     python scripts/render_previews.py models/<name>
     python scripts/render_previews.py models/<name> --all
+    python scripts/render_previews.py models/<name> --views iso,front,top
     python scripts/render_previews.py models/<name> --variant v2 --size 2000x1500
 
 Reads models/<name>/render.json:
@@ -16,8 +17,9 @@ Reads models/<name>/render.json:
       }
     }
 
-Primary variant only by default. Writes img/{iso,front,top}.png; with more than
-one active variant, writes img/<variant>/{iso,front,top}.png.
+Primary variant only by default. Writes img/iso.png for a single-variant model;
+with more than one declared variant, writes img/<variant>/iso.png. Pass --views
+to render additional front/top views.
 """
 
 import argparse
@@ -34,6 +36,7 @@ VIEWS = {
     "front": (90, 0, 0),
     "top": (0, 0, 0),
 }
+DEFAULT_VIEWS = "iso"
 
 
 def find_openscad():
@@ -125,6 +128,11 @@ def main():
         help="render every declared variant",
     )
     parser.add_argument("--size", default="1600x1200")
+    parser.add_argument(
+        "--views",
+        default=DEFAULT_VIEWS,
+        help="comma-separated views: iso, front, top (default: iso)",
+    )
     args = parser.parse_args()
 
     model_dir = (ROOT / args.model).resolve()
@@ -153,8 +161,16 @@ def main():
             f"have: {', '.join(variants)}"
         )
 
+    selected_views = [view.strip() for view in args.views.split(",") if view.strip()]
+    missing_views = [view for view in selected_views if view not in VIEWS]
+    if missing_views:
+        sys.exit(
+            f"error: unknown view(s): {', '.join(missing_views)}; "
+            f"have: {', '.join(VIEWS)}"
+        )
+
     openscad = find_openscad()
-    multiple = len(selected) > 1
+    multiple = len(variants) > 1 or len(selected) > 1
 
     for name in selected:
         entry = variants[name]
@@ -166,7 +182,8 @@ def main():
         out_dir.mkdir(parents=True, exist_ok=True)
         defines = define_args(entry.get("defines"))
 
-        for view, (rot_x, _rot_y, rot_z) in VIEWS.items():
+        for view in selected_views:
+            rot_x, _rot_y, rot_z = VIEWS[view]
             out = out_dir / f"{view}.png"
             cmd = [
                 openscad,
