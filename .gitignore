@@ -1,0 +1,20 @@
+# Build output (STLs are local-only; never in git history)
+/build/
+*.stl
+*.3mf
+*.gcode
+
+# Slicer / CAD project files are not sources for this repo
+*.FCStd
+*.FCStd1
+*.bak
+*~
+
+# Scratch
+tmp/
+__pycache__/
+*.pyc
+*.log
+.DS_Store
+Thumbs.db
+*.swp
