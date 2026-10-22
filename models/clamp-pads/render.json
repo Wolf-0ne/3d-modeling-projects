@@ -1,0 +1,8 @@
+{
+  "primary": "bar_clamp_swivel.scad",
+  "variants": {
+    "bar_top": {
+      "file": "bar_clamp_top.scad"
+    }
+  }
+}
