@@ -1,0 +1,60 @@
+{
+  "primary": "rock5bplus_model.scad",
+  "defines": {
+    "sma": 2,
+    "modemMount": 1,
+    "fan_25mm": 0
+  },
+  "variants": {
+    "sma0": {
+      "file": "rock5bplus_model.scad",
+      "defines": {
+        "sma": 0,
+        "modemMount": 1,
+        "fan_25mm": 0
+      }
+    },
+    "sma4": {
+      "file": "rock5bplus_model.scad",
+      "defines": {
+        "sma": 4,
+        "modemMount": 1,
+        "fan_25mm": 0
+      }
+    },
+    "modem_off": {
+      "file": "rock5bplus_model.scad",
+      "defines": {
+        "sma": 2,
+        "modemMount": 0,
+        "fan_25mm": 0
+      }
+    },
+    "fan25": {
+      "file": "rock5bplus_model.scad",
+      "defines": {
+        "sma": 2,
+        "modemMount": 1,
+        "fan_25mm": 1
+      }
+    },
+    "lessfans": {
+      "file": "rock5bplus_model.scad",
+      "defines": {
+        "sma": 2,
+        "modemMount": 1,
+        "fan_25mm": 0,
+        "less_fans": 1
+      }
+    },
+    "shrink": {
+      "file": "rock5bplus_model.scad",
+      "defines": {
+        "sma": 2,
+        "modemMount": 1,
+        "fan_25mm": 0,
+        "shrink": 1
+      }
+    }
+  }
+}
