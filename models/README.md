@@ -24,6 +24,7 @@ Only models that are present and verified are listed here.
 | [TS80P Soldering Kit](ts80p-soldering-kit/README.md) | dual, single, legacy | [iso](ts80p-soldering-kit/img/primary/iso.png) | [314754](https://www.printables.com/model/314754-ts80p-soldering-kit) |
 | [Netgear LM1200 Shell](netgear-lm1200-shell/README.md) | body, lid, full | [iso](netgear-lm1200-shell/img/primary/iso.png) | [771215](https://www.printables.com/model/771215-netgear-lm1200-caseshell) |
 | [NRadio C2000 Shell](nradio-c2000-shell/README.md) | full, fanonly, nofan | [iso](nradio-c2000-shell/img/primary/iso.png) | [665497](https://www.printables.com/model/665497-nradio-c2000-case-shell) |
+| [Orange Pi 5 Plus Case](orange-pi-5-plus-case/README.md) | v3, v2, v3_top, v2_top | [iso](orange-pi-5-plus-case/img/primary/iso.png) | — |
 
 Adding a model, source selection, and batch planning are owner-only tasks and
 are not documented in this repository.

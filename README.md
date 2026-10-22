@@ -16,9 +16,9 @@ published on Printables.
 
 ## Status
 
-- **Last verified**: 2026-10-21 (Batch 3)
-- **Models**: 7
-- **Build check**: `python scripts/check_models.py` builds 20 variants with zero warnings
+- **Last verified**: 2026-10-22 (Batch 4, Orange Pi)
+- **Models**: 8
+- **Build check**: `python scripts/check_models.py` builds 24 variants with zero warnings
 
 ## Quick start
 

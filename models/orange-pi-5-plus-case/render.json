@@ -1,0 +1,22 @@
+{
+  "primary": "orange_pi_enclosure_v3.scad",
+  "defines": {},
+  "variants": {
+    "v2": {
+      "file": "orange_pi_enclosure_v2.scad",
+      "defines": {}
+    },
+    "v3_top": {
+      "file": "orange_pi_enclosure_v3.scad",
+      "defines": {
+        "part": "top"
+      }
+    },
+    "v2_top": {
+      "file": "orange_pi_enclosure_v2.scad",
+      "defines": {
+        "part": "top"
+      }
+    }
+  }
+}
