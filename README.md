@@ -16,9 +16,9 @@ published on Printables.
 
 ## Status
 
-- **Last verified**: 2026-10-22 (Batch 4, Orange Pi + Rock 5B+)
-- **Models**: 9
-- **Build check**: `python scripts/check_models.py` builds 31 variants with zero warnings
+- **Last verified**: 2026-10-22 (Batch 5, QR Vise)
+- **Models**: 10
+- **Build check**: `python scripts/check_models.py` builds 34 variants with zero warnings
 
 ## Quick start
 

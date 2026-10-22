@@ -1,0 +1,20 @@
+{
+  "primary": "qr_vise.scad",
+  "defines": {
+    "display": "full"
+  },
+  "variants": {
+    "body": {
+      "file": "qr_vise.scad",
+      "defines": {
+        "display": "body"
+      }
+    },
+    "latch": {
+      "file": "qr_vise.scad",
+      "defines": {
+        "display": "latch"
+      }
+    }
+  }
+}
