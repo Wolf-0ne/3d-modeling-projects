@@ -1,0 +1,20 @@
+{
+  "primary": "lm1200_enclosure.scad",
+  "defines": {
+    "part": "body"
+  },
+  "variants": {
+    "lid": {
+      "file": "lm1200_enclosure.scad",
+      "defines": {
+        "part": "lid"
+      }
+    },
+    "full": {
+      "file": "lm1200_enclosure.scad",
+      "defines": {
+        "part": "full"
+      }
+    }
+  }
+}

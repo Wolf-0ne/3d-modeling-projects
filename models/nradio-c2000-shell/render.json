@@ -1,0 +1,19 @@
+{
+  "primary": "nradio_enclosure.scad",
+  "defines": {},
+  "variants": {
+    "fanonly": {
+      "file": "nradio_enclosure.scad",
+      "defines": {
+        "part": "lid",
+        "modem": false
+      }
+    },
+    "nofan": {
+      "file": "nradio_enclosure.scad",
+      "defines": {
+        "fan": false
+      }
+    }
+  }
+}
