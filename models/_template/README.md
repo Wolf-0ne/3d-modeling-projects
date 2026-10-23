@@ -2,10 +2,10 @@
 
 One-line description of what it is and what it fits.
 
-<!-- After rendering, add the preview image: img/iso.png -->
+<!-- After rendering, add the preview image: img/primary/iso.png -->
 
 This directory is a template. It has no model source; copy it when adding a
-model, then generate `img/iso.png` with `render_previews.py`.
+model, then generate `img/primary/iso.png` with `render_previews.py`.
 
 ## Status
 

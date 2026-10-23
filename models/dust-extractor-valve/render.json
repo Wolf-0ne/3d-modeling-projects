@@ -1,0 +1,11 @@
+{
+  "primary": "dust_extractor_valve_and_slider.scad",
+  "variants": {
+    "valve": {
+      "file": "dust_extractor_valve_and_slider.scad",
+      "defines": {
+        "part": "Valve"
+      }
+    }
+  }
+}

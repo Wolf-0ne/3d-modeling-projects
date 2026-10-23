@@ -28,6 +28,9 @@ Only models that are present and verified are listed here.
 | [Radxa Rock 5B+ Case](radxa-rock-5b-plus-case/README.md) | primary, sma0, sma4, modem_off, fan25, lessfans, shrink | [iso](radxa-rock-5b-plus-case/img/primary/iso.png) | — |
 | [QR Vise](qr-vise/README.md) | full, body, latch | [iso](qr-vise/img/primary/iso.png) | — |
 | [Clamp Pads](clamp-pads/README.md) | bar_swivel, bar_top | [iso](clamp-pads/img/primary/iso.png) | — |
+| [Bench Dogs](bench-dogs/README.md) | A + B small/medium/large | [iso](bench-dogs/img/primary/iso.png) | — |
+| [Tri-Wing Nut](tri-wing-nut/README.md) | single | [iso](tri-wing-nut/img/primary/iso.png) | — |
+| [Dust Extractor Valve](dust-extractor-valve/README.md) | slider, valve | [iso](dust-extractor-valve/img/primary/iso.png) | — |
 
 Adding a model, source selection, and batch planning are owner-only tasks and
 are not documented in this repository.
