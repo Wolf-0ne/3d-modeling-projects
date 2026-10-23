@@ -1,0 +1,8 @@
+{
+  "primary": "wen_3939_table_insert.scad",
+  "variants": {
+    "rikon": {
+      "file": "rikon_10_306_table_insert.scad"
+    }
+  }
+}

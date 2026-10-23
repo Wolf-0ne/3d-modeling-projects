@@ -33,6 +33,8 @@ Only models that are present and verified are listed here.
 | [Dust Extractor Valve](dust-extractor-valve/README.md) | slider, valve | [iso](dust-extractor-valve/img/primary/iso.png) | — |
 | [Thermaltake P3 Vertical GPU Foot](thermaltake-p3-gpu-foot/README.md) | single | [iso](thermaltake-p3-gpu-foot/img/primary/iso.png) | — |
 | [Cable Organizer](cable-organizer/README.md) | single | [iso](cable-organizer/img/primary/iso.png) | — |
+| [Bandsaw Table Inserts](bandsaw-table-inserts/README.md) | wen, rikon | [iso](bandsaw-table-inserts/img/primary/iso.png) | — |
+| [Furniture Foot](furniture-foot/README.md) | single | [iso](furniture-foot/img/primary/iso.png) | — |
 
 `—` in the Printables column means the model is not yet published there.
 
