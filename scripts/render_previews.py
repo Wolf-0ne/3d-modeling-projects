@@ -17,9 +17,8 @@ Reads models/<name>/render.json:
       }
     }
 
-Primary variant only by default. Writes img/iso.png for a single-variant model;
-with more than one declared variant, writes img/<variant>/iso.png. Pass --views
-to render additional front/top views.
+Primary variant only by default. Writes img/<variant>/iso.png for every selected
+variant. Pass --views to render additional front/top views.
 """
 
 import argparse
@@ -170,15 +169,13 @@ def main():
         )
 
     openscad = find_openscad()
-    multiple = len(variants) > 1 or len(selected) > 1
-
     for name in selected:
         entry = variants[name]
         source = model_dir / entry["file"]
         if not source.is_file():
             sys.exit(f"error: missing source {source}")
 
-        out_dir = model_dir / "img" / name if multiple else model_dir / "img"
+        out_dir = model_dir / "img" / name
         out_dir.mkdir(parents=True, exist_ok=True)
         defines = define_args(entry.get("defines"))
 

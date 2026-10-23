@@ -1,30 +1,42 @@
 #!/usr/bin/env python3
-"""Build every declared model variant and validate the output.
+"""Build declared model variants and validate the output.
 
 Usage:
     python scripts/check_models.py
     python scripts/check_models.py --model drawer-cabinet-organizer
-    python scripts/check_models.py --bed 210x250 --strict-bed
+    python scripts/check_models.py --changed
+    python scripts/check_models.py --all
+    python scripts/check_models.py --changed --jobs 4
 
 For each model directory with a render.json, every variant (primary included)
 is exported to build/<model>/<variant>.stl with --hardwarnings. A missing
 include or unknown module is only a warning in OpenSCAD and still exits 0, so
 warnings are treated as failures here.
 
+Normal runs use a content-addressed cache in build/.check-cache.json. --all
+forces a complete rebuild without reading or writing the cache. --changed uses
+git status to scope the run to changed models and models that consume changed
+libraries.
+
 STL parsing handles both ASCII and binary output. The bed check is a report by
 default; --strict-bed turns an oversized part into a failure.
 """
 
 import argparse
+import hashlib
 import json
 import os
+import re
 import shutil
 import struct
 import subprocess
 import sys
+from concurrent.futures import ProcessPoolExecutor
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+CACHE_PATH = ROOT / "build" / ".check-cache.json"
+INCLUDE_RE = re.compile(r"^\s*(?:include|use)\s*<([^>]+)>", re.M)
 
 
 def find_openscad():
@@ -162,9 +174,195 @@ def fits_bed(size, bed):
     return (x <= bed_x and y <= bed_y) or (x <= bed_y and y <= bed_x)
 
 
+def openscad_version(openscad):
+    proc = subprocess.run(
+        [openscad, "--version"],
+        text=True,
+        encoding="utf-8",
+        errors="replace",
+        stdout=subprocess.PIPE,
+        stderr=subprocess.STDOUT,
+    )
+    return (proc.stdout or "unknown").strip() or "unknown"
+
+
+def include_closure(source):
+    """Return [(relative path, sha256)] for source and its include graph."""
+    seen = set()
+    result = []
+
+    def walk(path):
+        try:
+            resolved = path.resolve()
+        except OSError:
+            return
+        try:
+            relative = resolved.relative_to(ROOT).as_posix()
+        except ValueError:
+            relative = resolved.as_posix()
+        if relative in seen or not resolved.is_file():
+            return
+        seen.add(relative)
+        data = resolved.read_bytes()
+        result.append((relative, hashlib.sha256(data).hexdigest()))
+        text = data.decode("utf-8", errors="replace")
+        for include in INCLUDE_RE.findall(text):
+            walk(resolved.parent / include)
+
+    walk(source)
+    return sorted(result)
+
+
+def variant_key(source, defines, version):
+    payload = {
+        "openscad": version,
+        "source": source.resolve().as_posix(),
+        "defines": defines or {},
+        "includes": include_closure(source),
+    }
+    blob = json.dumps(payload, sort_keys=True, separators=(",", ":"), default=str)
+    return hashlib.sha256(blob.encode("utf-8")).hexdigest()
+
+
+def load_cache():
+    try:
+        data = json.loads(CACHE_PATH.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return {}
+    return data if isinstance(data, dict) else {}
+
+
+def save_cache(cache):
+    CACHE_PATH.parent.mkdir(parents=True, exist_ok=True)
+    CACHE_PATH.write_text(
+        json.dumps(cache, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+
+
+def git_changed_paths():
+    try:
+        proc = subprocess.run(
+            ["git", "status", "--porcelain", "--untracked-files=all"],
+            cwd=ROOT,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            stdout=subprocess.PIPE,
+            stderr=subprocess.STDOUT,
+        )
+    except OSError:
+        sys.exit("error: --changed needs git; use --all")
+    if proc.returncode != 0:
+        sys.exit("error: --changed needs a git worktree; use --all")
+
+    paths = set()
+    for line in (proc.stdout or "").splitlines():
+        if len(line) < 4:
+            continue
+        raw = line[3:].strip()
+        if " -> " in raw:
+            raw = raw.split(" -> ", 1)[1]
+        raw = raw.strip().strip('"').replace("\\", "/")
+        if raw:
+            paths.add(raw)
+    return paths
+
+
+def all_model_dirs():
+    return sorted(
+        path
+        for path in (ROOT / "models").iterdir()
+        if path.is_dir() and not path.name.startswith("_")
+    )
+
+
+def changed_model_dirs():
+    paths = git_changed_paths()
+    names = set()
+    library_changed = False
+
+    for path in paths:
+        parts = path.split("/")
+        if parts[0] == "models" and len(parts) > 1:
+            if not parts[1].startswith("_"):
+                names.add(parts[1])
+        if parts[0] == "libraries":
+            library_changed = True
+
+    dirs = all_model_dirs()
+    if library_changed:
+        for model_dir in dirs:
+            variants = load_variants(model_dir) or {}
+            for entry in variants.values():
+                source = model_dir / entry["file"]
+                if any(
+                    relative.startswith("libraries/")
+                    for relative, _digest in include_closure(source)
+                ):
+                    names.add(model_dir.name)
+                    break
+
+    return [model_dir for model_dir in dirs if model_dir.name in names]
+
+
+def build_one(task):
+    label, source, out, defines, openscad = task
+    code, bad, output = run_export(openscad, source, out, defines)
+    if code != 0 or bad:
+        detail = "; ".join(bad[:3]) or (
+            output.strip().splitlines()[-1] if output.strip() else "no output"
+        )
+        return {
+            "label": label,
+            "ok": False,
+            "error": f"build failed ({code}): {detail}",
+        }
+
+    vertices, box = parse_stl(out)
+    if not box or vertices == 0:
+        return {
+            "label": label,
+            "ok": False,
+            "error": "empty or unreadable STL",
+        }
+
+    return {
+        "label": label,
+        "ok": True,
+        "vertices": vertices,
+        "box": list(box),
+        "stl_size": out.stat().st_size,
+    }
+
+
+def size_text(box):
+    width = box[1] - box[0]
+    depth = box[3] - box[2]
+    height = box[5] - box[4]
+    return f"{width:.1f}x{depth:.1f}x{height:.1f}"
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--model", default=None, help="model name or directory")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--model", default=None, help="model name or directory")
+    scope.add_argument(
+        "--changed",
+        action="store_true",
+        help="only models changed in git (and library consumers)",
+    )
+    scope.add_argument(
+        "--all",
+        action="store_true",
+        help="build every variant and bypass the cache",
+    )
+    parser.add_argument(
+        "--jobs",
+        type=int,
+        default=max(1, min(4, (os.cpu_count() or 2) - 2)),
+        help="parallel OpenSCAD exports (default: up to 4)",
+    )
     parser.add_argument("--bed", default="210x250", help="bed size WxH")
     parser.add_argument(
         "--strict-bed",
@@ -173,22 +371,31 @@ def main():
     )
     args = parser.parse_args()
 
+    if args.jobs < 1:
+        sys.exit("error: --jobs must be at least 1")
+
     if args.model:
         candidate = Path(args.model)
         model_dir = candidate if candidate.is_absolute() else ROOT / candidate
         if not model_dir.is_dir():
             model_dir = ROOT / "models" / args.model
         model_dirs = [model_dir]
+    elif args.changed:
+        model_dirs = changed_model_dirs()
+        if not model_dirs:
+            print("no changed models; nothing to check")
+            return 0
     else:
-        model_dirs = sorted(
-            path
-            for path in (ROOT / "models").iterdir()
-            if path.is_dir() and not path.name.startswith("_")
-        )
+        model_dirs = all_model_dirs()
 
     bed = parse_bed(args.bed)
     openscad = find_openscad()
-    rows = []
+    version = openscad_version(openscad)
+    cache_enabled = not args.all
+    cache = load_cache() if cache_enabled else {}
+
+    records = []
+    pending = []
     failures = []
 
     for model_dir in model_dirs:
@@ -199,54 +406,98 @@ def main():
         for name, entry in variants.items():
             source = model_dir / entry["file"]
             label = f"{model_dir.name}/{name}"
+            out = ROOT / "build" / model_dir.name / f"{name}.stl"
 
             if not source.is_file():
                 failures.append(f"{label}: missing source {source}")
-                rows.append((label, "FAIL", "-", "-", "-"))
+                records.append((label, "FAIL", None, None, None, None))
                 continue
 
-            out = ROOT / "build" / model_dir.name / f"{name}.stl"
-            code, bad, output = run_export(
-                openscad, source, out, entry.get("defines")
-            )
-
-            if code != 0 or bad:
-                detail = "; ".join(bad[:3]) or (
-                    output.strip().splitlines()[-1] if output.strip() else "no output"
-                )
-                failures.append(f"{label}: build failed ({code}): {detail}")
-                rows.append((label, "FAIL", "-", "-", "-"))
+            key = variant_key(source, entry.get("defines"), version)
+            cached = cache.get(label) if cache_enabled else None
+            if (
+                isinstance(cached, dict)
+                and cached.get("key") == key
+                and out.is_file()
+                and cached.get("stl_size") == out.stat().st_size
+                and cached.get("vertices")
+                and cached.get("box")
+            ):
+                records.append((label, "cached", cached["vertices"], cached["box"], None, key))
                 continue
 
-            vertices, box = parse_stl(out)
-            if not box or vertices == 0:
-                failures.append(f"{label}: empty or unreadable STL")
-                rows.append((label, "FAIL", "0", "-", "-"))
-                continue
+            records.append((label, "pending", None, None, entry.get("defines"), key))
+            pending.append((label, source, out, entry.get("defines"), openscad))
 
-            width = box[1] - box[0]
-            depth = box[3] - box[2]
-            height = box[5] - box[4]
-            size_text = f"{width:.1f}x{depth:.1f}x{height:.1f}"
-            bed_ok = fits_bed((width, depth), bed)
-            bed_text = "ok" if bed_ok else "EXCEEDS"
+    results = {}
+    if pending:
+        if args.jobs > 1 and len(pending) > 1:
+            with ProcessPoolExecutor(max_workers=args.jobs) as executor:
+                for result in executor.map(build_one, pending):
+                    results[result["label"]] = result
+        else:
+            for task in pending:
+                result = build_one(task)
+                results[result["label"]] = result
 
-            if args.strict_bed and not bed_ok:
-                failures.append(f"{label}: {size_text} exceeds bed {args.bed}")
+    rows = []
+    cached_count = 0
+    for label, state, vertices, box, _defines, key in records:
+        if state == "cached":
+            cached_count += 1
+            rows.append((label, "cached", str(vertices), size_text(box), box))
+            continue
 
-            rows.append((label, "OK", str(vertices), size_text, bed_text))
+        if state == "FAIL":
+            rows.append((label, "FAIL", "-", "-", "-"))
+            continue
+
+        result = results.get(label)
+        if not result or not result.get("ok"):
+            error = result.get("error", "unknown build failure") if result else "no result"
+            failures.append(f"{label}: {error}")
+            cache.pop(label, None)
+            rows.append((label, "FAIL", "-", "-", "-"))
+            continue
+
+        box = result["box"]
+        rows.append((label, "OK", str(result["vertices"]), size_text(box), box))
+        if cache_enabled:
+            cache[label] = {
+                "key": key,
+                "vertices": result["vertices"],
+                "box": box,
+                "stl_size": result["stl_size"],
+            }
+
+    if cache_enabled:
+        save_cache(cache)
 
     if not rows:
         print("no models with render.json found")
         return 0
 
-    widths = [max(len(str(row[i])) for row in rows) for i in range(5)]
+    report_rows = []
+    for label, status, vertices, size, box in rows:
+        if status in ("OK", "cached"):
+            bed_ok = fits_bed(
+                (box[1] - box[0], box[3] - box[2]),
+                bed,
+            )
+            bed_text = "ok" if bed_ok else "EXCEEDS"
+            if args.strict_bed and not bed_ok:
+                failures.append(f"{label}: {size} exceeds bed {args.bed}")
+        else:
+            bed_text = "-"
+        report_rows.append((label, status, vertices, size, bed_text))
+
+    widths = [max(len(str(row[i])) for row in report_rows) for i in range(5)]
     header = ("model/variant", "status", "verts", "bbox mm", "bed")
     print(
         f"{header[0]:<{widths[0]}}  {header[1]:<{widths[1]}}  "
         f"{header[2]:>{widths[2]}}  {header[3]:>{widths[3]}}  {header[4]}"
     )
-    for row in rows:
+    for row in report_rows:
         print(
             f"{row[0]:<{widths[0]}}  {row[1]:<{widths[1]}}  "
             f"{row[2]:>{widths[2]}}  {row[3]:>{widths[3]}}  {row[4]}"
@@ -258,7 +509,10 @@ def main():
             print(f"  - {failure}")
         return 1
 
-    print(f"\n{len(rows)} variant(s) built clean")
+    summary = f"{len(report_rows)} variant(s) checked clean"
+    if cached_count:
+        summary += f" ({cached_count} cached)"
+    print(f"\n{summary}")
     return 0
 
 

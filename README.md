@@ -59,8 +59,17 @@ lists only models that are actually present and verified.
 ## Build and preview
 
 ```bash
-# Build every variant, validate STL geometry, fail on any warning
+# Check all variants, reusing clean build results when sources are unchanged
 python scripts/check_models.py
+
+# Scope to models changed in git (and models using changed libraries)
+python scripts/check_models.py --changed
+
+# Force a complete rebuild and bypass the cache
+python scripts/check_models.py --all
+
+# Parallel OpenSCAD exports (default: up to 4)
+python scripts/check_models.py --jobs 4
 
 # One model
 python scripts/check_models.py --model drawer-cabinet-organizer
@@ -75,9 +84,12 @@ python scripts/render_previews.py models/drawer-cabinet-organizer --all
 python scripts/render_previews.py models/drawer-cabinet-organizer --views iso,front,top
 ```
 
-`check_models.py` writes STLs to `build/<model>/<variant>.stl`. Local STLs may
-also sit beside the `.scad` files while testing; every `*.stl`, `*.3mf`, and
-`*.gcode` is ignored by git either way.
+`check_models.py` writes STLs to `build/<model>/<variant>.stl`. Clean results are
+keyed by source, include files, defines, and OpenSCAD version in
+`build/.check-cache.json`; `--all` bypasses that cache. `--changed` requires a
+git worktree; use `--all` from a downloaded ZIP. Local STLs may also sit beside
+the `.scad` files while testing; every `*.stl`, `*.3mf`, and `*.gcode` is ignored
+by git either way.
 
 A model is ready to publish only when the build check emits **zero warnings**:
 OpenSCAD exits 0 on a missing include or unknown module, so exit status alone
@@ -108,7 +120,9 @@ openscad -D brandFont='"DejaVu Sans Mono:style=Bold"' ...
 ```
 
 Suggested substitutes: `DejaVu Sans Mono` or `Liberation Mono` (both OFL).
-Fonts are **not** covered by this repository's CC BY 4.0 license.
+Fonts are **not** covered by this repository's CC BY 4.0 license. The build
+cache does not hash installed fonts; run `python scripts/check_models.py --all`
+after changing font availability.
 
 ## What this repository does not publish
 
