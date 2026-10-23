@@ -16,9 +16,9 @@ published on Printables.
 
 ## Status
 
-- **Last verified**: 2026-10-22 (Batch 7, workbench/tooling)
-- **Models**: 14
-- **Build check**: `python scripts/check_models.py` checks 40 variants with zero warnings
+- **Last verified**: 2026-10-22 (Batch 8a, cable/GPU)
+- **Models**: 16
+- **Build check**: `python scripts/check_models.py` checks 42 variants with zero warnings
 
 ## Quick start
 
