@@ -38,7 +38,7 @@ openscad --hardwarnings -o build/tri_wing_nut.stl tri_wing_nut.scad
 
 ## Known issues
 
-- Printables model URL is not recorded in this README yet.
+- Not yet published on Printables.
 - Physical-test status is not recorded.
 
 ## License

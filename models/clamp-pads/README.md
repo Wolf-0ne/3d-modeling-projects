@@ -75,7 +75,7 @@ openscad --hardwarnings -o build/bar_clamp_swivel.stl bar_clamp_swivel.scad
 
 ## Known issues
 
-- Printables model URL is not recorded in this README yet.
+- Not yet published on Printables.
 - Physical-test status is not recorded.
 
 ## License

@@ -12,6 +12,7 @@ Published on [Printables](https://www.printables.com/model/617365-osmo-action-4-
 - Last verified: 2026-10-21 (build)
 - OpenSCAD version: see the [root README](../../README.md)
 - Designed for: DJI Osmo Action 4
+- Compatibility: Action 5 is untested; it may fit based on published photos.
 - Physically tested on: Original Prusa MK3.5S
 
 ## Files
@@ -35,6 +36,11 @@ All variants share the same 19.3 x 22.9 mm footprint.
 
 None.
 
+## Material
+
+Test prints were made in PLA. PETG or another heat-tolerant material is
+recommended for use on the camera.
+
 ## Printing
 
 Print as oriented. Check the latch and top overhangs in your slicer; support
@@ -56,7 +62,9 @@ openscad --hardwarnings -D large=0 -o build/OA4_USBC_Door.stl OA4_USBC_Door.scad
 
 ## Known issues
 
-None recorded.
+- The door can be difficult to remove; a dental tool was needed on one
+  revision. Test-fit before relying on it.
+- Action 5 compatibility is not tested.
 
 ## License
 

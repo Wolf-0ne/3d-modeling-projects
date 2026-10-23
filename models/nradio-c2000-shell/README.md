@@ -1,7 +1,8 @@
 # NRadio C2000 Shell
 
-A vented enclosure for the NRadio C2000 LTE modem. The current layout is the
-only published source; fan and modem openings are selectable options.
+A vented enclosure for the NRadio C2000 LTE modem, designed for modem airflow
+and mounting in an IRL backpack. The current layout is the only published
+source; fan and modem openings are selectable options.
 
 Published on [Printables](https://www.printables.com/model/665497-nradio-c2000-case-shell).
 
@@ -42,7 +43,16 @@ Select parts and options with:
 
 ## Hardware
 
-No fasteners are included. The model uses the existing modem mounting points.
+| Item | Qty | Notes |
+|---|---|---|
+| M3 screw | 4 | Lid; length not stated |
+| M3x15 screw | 4 | Optional 30 mm fan |
+
+The modem board is press-fit and uses the existing modem mounting points.
+
+## Material
+
+PETG.
 
 ## Printing
 

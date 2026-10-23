@@ -25,8 +25,8 @@ Published on [Printables](https://www.printables.com/model/314754-ts80p-solderin
 
 | Variant | Image | Dimensions | Difference |
 |---|---|---|---|
-| primary | `img/primary/` | 65 x 117 x 43 mm | dual iron/tip layout (default) |
-| `single` | `img/single/` | 65 x 102 x 43 mm | single iron/tip layout |
+| primary | `img/primary/` | 65 x 117 x 43 mm | 2 irons + 6 tips (default) |
+| `single` | `img/single/` | 65 x 102 x 43 mm | 1 iron + 4 tips |
 | `legacy` | `img/legacy/` | 65 x 118 x 43 mm | older opening layout |
 
 The legacy file is kept separate because its body and opening layout differ

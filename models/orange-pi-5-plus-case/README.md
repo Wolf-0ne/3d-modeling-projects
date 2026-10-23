@@ -3,7 +3,8 @@
 Two source versions of a vented Orange Pi 5 Plus enclosure. `v3` is the newer
 revision; `v2` is kept for the earlier fit.
 
-Printables profile: [wolfone_17684](https://www.printables.com/@wolfone_17684).
+Published on Printables: [v3](https://www.printables.com/model/1078542-orange-pi-5-plus-case-v3),
+[v2](https://www.printables.com/model/771222-orange-pi-5-plus-case-v2).
 
 ![Isometric preview](img/primary/iso.png)
 
@@ -31,6 +32,20 @@ Printables profile: [wolfone_17684](https://www.printables.com/@wolfone_17684).
 | `v2_top` | `img/v2_top/` | 86.4 x 114.4 x 7.5 mm | v2 lid, fan mount |
 
 The lid is shown with the fan mount. Without it the lid is 5.2 mm tall.
+
+## Hardware
+
+| Item | Qty | Notes |
+|---|---|---|
+| Flat M3 screw | 4 | v2 lid |
+| Flat M3 screw | 5 or 6 | v3 lid |
+| 5 V 3007 fan | 1 | Optional; press-fit in the lid fan mount |
+
+The board is press-fit. `v3` may need light cleanup depending on the printer.
+
+## Material
+
+PETG.
 
 ## Options
 
@@ -69,7 +84,6 @@ openscad --hardwarnings -D part="top" -o build/opi_v2_top.stl orange_pi_enclosur
 
 ## Known issues
 
-- Printables model links are not recorded in this README yet.
 - `v3` adds a separate NVMe cutout option; it is off by default.
 
 ## License

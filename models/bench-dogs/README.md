@@ -45,7 +45,7 @@ openscad --hardwarnings -o build/bench_dogs.stl bench_dogs.scad
 
 ## Known issues
 
-- Printables model URL is not recorded in this README yet.
+- Not yet published on Printables.
 - Physical-test status is not recorded.
 
 ## License

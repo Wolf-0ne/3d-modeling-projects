@@ -1,8 +1,9 @@
 # Drawer / Cabinet Organizer
 
-A chamfered, open-top organizer tray for drawers and cabinets. The outer
-footprint is 70 x 70 x 35 mm; `divisions` sets the number of internal
-compartments from 1 to 4.
+A chamfered, open-top organizer tray for drawers and cabinets. It was designed
+for metal cabinet drawers and small parts such as screws and nails; it also
+works standalone in a drawer. The outer footprint is 70 x 70 x 35 mm;
+`divisions` sets the number of internal compartments from 1 to 4.
 
 Published on [Printables](https://www.printables.com/model/314660-drawer-cabinet-organizer).
 

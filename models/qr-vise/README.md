@@ -63,7 +63,7 @@ openscad --hardwarnings -D 'display="body"' -o build/qr_vise_body.stl qr_vise.sc
 
 ## Known issues
 
-- Printables model URL is not recorded in this README yet.
+- Not yet published on Printables.
 - Physical-test status is not recorded.
 
 ## License

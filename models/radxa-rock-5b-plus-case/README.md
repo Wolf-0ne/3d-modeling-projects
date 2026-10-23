@@ -3,7 +3,7 @@
 Vented enclosure for the Radxa Rock 5B+ with optional top antenna mounts,
 modem mounting, and 25 mm or 30 mm fan layouts.
 
-Printables profile: [wolfone_17684](https://www.printables.com/@wolfone_17684).
+Published on [Printables](https://www.printables.com/model/1218830-radxa-rock-5b-case).
 
 ![Isometric preview](img/primary/iso.png)
 
@@ -48,10 +48,28 @@ The source defaults remain `sma=0 modemMount=0`, matching the public source.
 -D pcb=0|1            # show PCB reference
 ```
 
+## Hardware
+
+| Item | Qty | Notes |
+|---|---|---|
+| Flat M3x6 screw | 4 | Lid |
+| Self-tapping screw | 2 | Approx. M2.5 x 6 mm; board alignment pegs |
+| 30 x 10 mm or 25 x 10 mm fan | 1 | Fan position depends on variant |
+| SMA antenna | Optional | Side-grid or lid mounts on some variants |
+| Modem carrier board | Optional | May need auxiliary power |
+
+The board is aligned by body pegs. Some variants support an internal modem;
+check the carrier-board dimensions and power requirement.
+
+## Material
+
+PETG.
+
 ## Printing
 
-Print the body and lid flat as oriented. The model is designed for a 210 x 250
-mm bed. No supports are modeled.
+Print the body and lid as oriented. Tree supports are recommended for the body;
+the model does not include supports. The model is designed for a 210 x 250 mm
+bed. Some cleanup may be needed.
 
 ## Build
 
@@ -68,7 +86,6 @@ openscad --hardwarnings -D sma=2 -D modemMount=1 -o build/rock5b.stl rock5bplus_
 
 ## Known issues
 
-- Printables model URL is not recorded in this README yet.
 - Physical-test status is not recorded.
 - The branding text uses `Consolas:Bold`; override the font in OpenSCAD if it
   is unavailable on the host.

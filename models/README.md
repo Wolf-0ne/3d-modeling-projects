@@ -24,13 +24,17 @@ Only models that are present and verified are listed here.
 | [TS80P Soldering Kit](ts80p-soldering-kit/README.md) | dual, single, legacy | [iso](ts80p-soldering-kit/img/primary/iso.png) | [314754](https://www.printables.com/model/314754-ts80p-soldering-kit) |
 | [Netgear LM1200 Shell](netgear-lm1200-shell/README.md) | body, lid, full | [iso](netgear-lm1200-shell/img/primary/iso.png) | [771215](https://www.printables.com/model/771215-netgear-lm1200-caseshell) |
 | [NRadio C2000 Shell](nradio-c2000-shell/README.md) | full, fanonly, nofan | [iso](nradio-c2000-shell/img/primary/iso.png) | [665497](https://www.printables.com/model/665497-nradio-c2000-case-shell) |
-| [Orange Pi 5 Plus Case](orange-pi-5-plus-case/README.md) | v3, v2, v3_top, v2_top | [iso](orange-pi-5-plus-case/img/primary/iso.png) | — |
-| [Radxa Rock 5B+ Case](radxa-rock-5b-plus-case/README.md) | primary, sma0, sma4, modem_off, fan25, lessfans, shrink | [iso](radxa-rock-5b-plus-case/img/primary/iso.png) | — |
+| [Orange Pi 5 Plus Case](orange-pi-5-plus-case/README.md) | v3, v2, v3_top, v2_top | [iso](orange-pi-5-plus-case/img/primary/iso.png) | [v3](https://www.printables.com/model/1078542-orange-pi-5-plus-case-v3) / [v2](https://www.printables.com/model/771222-orange-pi-5-plus-case-v2) |
+| [Radxa Rock 5B+ Case](radxa-rock-5b-plus-case/README.md) | primary, sma0, sma4, modem_off, fan25, lessfans, shrink | [iso](radxa-rock-5b-plus-case/img/primary/iso.png) | [1218830](https://www.printables.com/model/1218830-radxa-rock-5b-case) |
 | [QR Vise](qr-vise/README.md) | full, body, latch | [iso](qr-vise/img/primary/iso.png) | — |
 | [Clamp Pads](clamp-pads/README.md) | bar_swivel, bar_top | [iso](clamp-pads/img/primary/iso.png) | — |
 | [Bench Dogs](bench-dogs/README.md) | A + B small/medium/large | [iso](bench-dogs/img/primary/iso.png) | — |
 | [Tri-Wing Nut](tri-wing-nut/README.md) | single | [iso](tri-wing-nut/img/primary/iso.png) | — |
 | [Dust Extractor Valve](dust-extractor-valve/README.md) | slider, valve | [iso](dust-extractor-valve/img/primary/iso.png) | — |
+| [Thermaltake P3 Vertical GPU Foot](thermaltake-p3-gpu-foot/README.md) | single | [iso](thermaltake-p3-gpu-foot/img/primary/iso.png) | — |
+| [Cable Organizer](cable-organizer/README.md) | single | [iso](cable-organizer/img/primary/iso.png) | — |
+
+`—` in the Printables column means the model is not yet published there.
 
 Adding a model, source selection, and batch planning are owner-only tasks and
 are not documented in this repository.

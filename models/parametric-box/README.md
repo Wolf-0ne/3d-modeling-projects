@@ -51,7 +51,7 @@ openscad --hardwarnings -D variant="elongated" -o build/parametric_box.stl param
 
 ## Known issues
 
-None recorded.
+- Not yet published on Printables.
 
 ## License
 

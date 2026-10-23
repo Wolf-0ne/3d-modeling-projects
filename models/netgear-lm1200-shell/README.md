@@ -1,7 +1,9 @@
 # Netgear LM1200 Shell
 
-A vented enclosure for the Netgear LM1200 LTE modem. The body and lid are
-separate print parts; the `full` variant previews them together.
+A vented enclosure for the Netgear LM1200 LTE modem, derived from the NRadio
+C2000 enclosure for modem airflow and mounting in a Belabox IRL backpack. The
+body and lid are separate print parts; the `full` variant previews them
+together.
 
 Published on [Printables](https://www.printables.com/model/771215-netgear-lm1200-caseshell).
 
@@ -32,7 +34,16 @@ Select a part with `-D part="body"`, `-D part="lid"`, or `-D part="full"`.
 
 ## Hardware
 
-No fasteners are included. The model uses the existing modem mounting points.
+| Item | Qty | Notes |
+|---|---|---|
+| M3 screw | 4 | Lid; length not stated |
+| M3x15 screw | 4 | Optional 30 mm fan |
+
+The modem board is press-fit and uses the existing modem mounting points.
+
+## Material
+
+PETG.
 
 ## Printing
 

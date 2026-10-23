@@ -55,7 +55,7 @@ openscad --hardwarnings -o build/thread_tap_box.stl thread_tap_box.scad
 
 ## Known issues
 
-None recorded.
+- Not yet published on Printables.
 
 ## License
 

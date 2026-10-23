@@ -55,7 +55,7 @@ openscad --hardwarnings -D 'part="Valve"' -o build/dust_valve.stl dust_extractor
 
 ## Known issues
 
-- Printables model URL is not recorded in this README yet.
+- Not yet published on Printables.
 - Physical-test status is not recorded.
 
 ## License
