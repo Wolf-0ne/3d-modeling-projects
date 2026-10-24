@@ -9,6 +9,10 @@ Published on [Printables](https://www.printables.com/model/314660-drawer-cabinet
 
 ![Isometric preview](img/primary/iso.png)
 
+## Photos
+
+![Organizers in a metal cabinet drawer](img/photos/metal_drawer_boxes.jpg)
+
 ## Status
 
 - Last verified: 2026-10-21 (build)
