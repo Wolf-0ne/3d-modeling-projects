@@ -1,0 +1,29 @@
+{
+  "primary": "electronics_box.scad",
+  "defines": {
+    "part": "panels"
+  },
+  "variants": {
+    "joystick": {
+      "file": "electronics_box.scad",
+      "defines": {
+        "part": "joystick"
+      }
+    },
+    "x-tensioner": {
+      "file": "x_tensioner.scad"
+    },
+    "x-clamp": {
+      "file": "x_clamp.scad"
+    },
+    "y-plate": {
+      "file": "y_plate.scad"
+    },
+    "z-mount": {
+      "file": "z_mount.scad"
+    },
+    "belt-plate": {
+      "file": "belt_plate.scad"
+    }
+  }
+}
