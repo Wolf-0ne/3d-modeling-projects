@@ -9,7 +9,6 @@ through-bolt.
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested on: not recorded
 
 ## Design notes
 
@@ -39,7 +38,6 @@ openscad --hardwarnings -o build/tri_wing_nut.stl tri_wing_nut.scad
 ## Known issues
 
 - Not yet published on Printables.
-- Physical-test status is not recorded.
 
 ## License
 

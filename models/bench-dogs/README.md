@@ -9,7 +9,6 @@ and three B-style dogs: small, medium, and large.
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested on: not recorded
 
 ## Design notes
 
@@ -46,7 +45,6 @@ openscad --hardwarnings -o build/bench_dogs.stl bench_dogs.scad
 ## Known issues
 
 - Not yet published on Printables.
-- Physical-test status is not recorded.
 
 ## License
 

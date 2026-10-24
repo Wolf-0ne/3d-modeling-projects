@@ -9,7 +9,7 @@ equipment foot.
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested: yes (printer/date not recorded)
+- Physically tested: yes
 
 ## Files
 

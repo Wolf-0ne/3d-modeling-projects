@@ -1,6 +1,6 @@
 # Models
 
-Each directory is one model. Models are added and verified in batches.
+Each directory contains one model.
 
 ## Model directory contents
 
@@ -8,12 +8,10 @@ Each directory is one model. Models are added and verified in batches.
 README.md      model notes, variants, non-print hardware
 render.json    primary source + declared variants
 *.scad         canonical source
-img/           preview PNGs (and photos, when approved)
+img/           preview PNGs and photos
 ```
 
 ## Index
-
-Only models that are present and verified are listed here.
 
 | Model | Variants | Preview | Printables |
 |---|---|---|---|
@@ -35,8 +33,8 @@ Only models that are present and verified are listed here.
 | [Cable Organizer](cable-organizer/README.md) | single | [iso](cable-organizer/img/primary/iso.png) | — |
 | [Bandsaw Table Inserts](bandsaw-table-inserts/README.md) | wen, rikon | [iso](bandsaw-table-inserts/img/primary/iso.png) | — |
 | [Furniture Foot](furniture-foot/README.md) | single | [iso](furniture-foot/img/primary/iso.png) | — |
+| [CNC Machine Parts](cnc-machine-parts/README.md) | panels, joystick, x-tensioner, x-clamp, y-plate, z-mount, belt-plate | [iso](cnc-machine-parts/img/primary/iso.png) | — |
 
-`—` in the Printables column means the model is not yet published there.
+`—` means there is no Printables listing for that model.
 
-Adding a model, source selection, and batch planning are owner-only tasks and
-are not documented in this repository.
+

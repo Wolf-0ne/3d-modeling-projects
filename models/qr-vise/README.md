@@ -20,7 +20,7 @@ views.
 
 - Last verified: 2026-10-24 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested on: builder's bench; mechanism shown installed (2026-10-24)
+- Physically tested: yes, installed on a woodworking bench (2026-10-24)
 
 ## Files
 
@@ -68,9 +68,8 @@ pin. That forces the half nut to lock, and friction holds the clamping pressure.
 Turning to the left makes the small pawl that sticks out hit the pin and
 disengage the half nut, so the jaws slide freely.
 
-The parts are assembled into a four-sided wooden box. The builder used 3/4 in
-hickory or similar hardwood; plywood also works and is what the original box was
-made from.
+The parts are assembled into a four-sided wooden box. A 3/4 in hickory or
+similar hardwood box works; plywood also works.
 
 ## Printing
 

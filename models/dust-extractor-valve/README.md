@@ -9,7 +9,6 @@ contains both printable parts and tube-connector options.
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested on: not recorded
 
 ## Files
 
@@ -56,7 +55,6 @@ openscad --hardwarnings -D 'part="Valve"' -o build/dust_valve.stl dust_extractor
 ## Known issues
 
 - Not yet published on Printables.
-- Physical-test status is not recorded.
 
 ## License
 

@@ -16,9 +16,9 @@ published on Printables.
 
 ## Status
 
-- **Last verified**: 2026-10-22 (Batch 8c, bandsaw/furniture)
-- **Models**: 18
-- **Build check**: `python scripts/check_models.py` checks 45 variants with zero warnings
+- **Last verified**: 2026-10-24 (CNC parts)
+- **Models**: 19
+- **Build check**: `python scripts/check_models.py` checks 52 variants with zero warnings
 
 ## Quick start
 
@@ -65,7 +65,10 @@ python scripts/check_models.py
 # Scope to models changed in git (and models using changed libraries)
 python scripts/check_models.py --changed
 
-# Force a complete rebuild and bypass the cache
+# Scope to explicit model dirs, source files, or library files
+python scripts/check_models.py --paths models/cable-organizer models/bandsaw-table-inserts
+
+# Full audit only; not needed for normal stage or commit checks
 python scripts/check_models.py --all
 
 # Parallel OpenSCAD exports (default: up to 4)

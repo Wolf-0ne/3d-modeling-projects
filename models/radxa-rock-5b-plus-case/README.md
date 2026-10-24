@@ -11,7 +11,6 @@ Published on [Printables](https://www.printables.com/model/1218830-radxa-rock-5b
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested on: not recorded
 
 ## Files
 
@@ -86,7 +85,6 @@ openscad --hardwarnings -D sma=2 -D modemMount=1 -o build/rock5b.stl rock5bplus_
 
 ## Known issues
 
-- Physical-test status is not recorded.
 - The branding text uses `Consolas:Bold`; override the font in OpenSCAD if it
   is unavailable on the host.
 

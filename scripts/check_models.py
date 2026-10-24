@@ -5,6 +5,7 @@ Usage:
     python scripts/check_models.py
     python scripts/check_models.py --model drawer-cabinet-organizer
     python scripts/check_models.py --changed
+    python scripts/check_models.py --paths models/foo models/bar
     python scripts/check_models.py --all
     python scripts/check_models.py --changed --jobs 4
 
@@ -16,7 +17,8 @@ warnings are treated as failures here.
 Normal runs use a content-addressed cache in build/.check-cache.json. --all
 forces a complete rebuild without reading or writing the cache. --changed uses
 git status to scope the run to changed models and models that consume changed
-libraries.
+libraries. --paths accepts explicit model directories, source files, or library
+files and resolves them to the affected models.
 
 STL parsing handles both ASCII and binary output. The bed check is a report by
 default; --strict-bed turns an oversized part into a failure.
@@ -277,6 +279,59 @@ def all_model_dirs():
     )
 
 
+def _relative_to_root(path):
+    try:
+        return path.resolve().relative_to(ROOT)
+    except (OSError, ValueError):
+        return None
+
+
+def models_for_paths(paths):
+    """Resolve explicit model dirs, source files, or libraries to model dirs."""
+    selected = set()
+    library_paths = set()
+    dirs = all_model_dirs()
+
+    for raw in paths:
+        path = Path(raw)
+        if not path.is_absolute():
+            path = ROOT / path
+        path = path.resolve()
+        if not path.exists():
+            sys.exit(f"error: path does not exist: {raw}")
+
+        relative = _relative_to_root(path)
+        if relative is None:
+            sys.exit(f"error: path is outside the repository: {raw}")
+
+        parts = relative.parts
+        if len(parts) == 0:
+            continue
+        if parts[0] == "models" and len(parts) > 1:
+            model_dir = ROOT / "models" / parts[1]
+            if model_dir.is_dir():
+                selected.add(parts[1])
+        elif parts[0] == "libraries":
+            library_paths.add(relative.as_posix())
+
+    if library_paths:
+        for model_dir in dirs:
+            variants = load_variants(model_dir) or {}
+            for entry in variants.values():
+                source = model_dir / entry["file"]
+                closure = include_closure(source)
+                if any(
+                    relative == library
+                    or relative.startswith(library + "/")
+                    for relative, _digest in closure
+                    for library in library_paths
+                ):
+                    selected.add(model_dir.name)
+                    break
+
+    return [model_dir for model_dir in dirs if model_dir.name in selected]
+
+
 def changed_model_dirs():
     paths = git_changed_paths()
     names = set()
@@ -353,6 +408,12 @@ def main():
         help="only models changed in git (and library consumers)",
     )
     scope.add_argument(
+        "--paths",
+        nargs="+",
+        metavar="PATH",
+        help="model dirs, source files, or library files to check",
+    )
+    scope.add_argument(
         "--all",
         action="store_true",
         help="build every variant and bypass the cache",
@@ -384,6 +445,11 @@ def main():
         model_dirs = changed_model_dirs()
         if not model_dirs:
             print("no changed models; nothing to check")
+            return 0
+    elif args.paths:
+        model_dirs = models_for_paths(args.paths)
+        if not model_dirs:
+            print("no model paths matched; nothing to check")
             return 0
     else:
         model_dirs = all_model_dirs()

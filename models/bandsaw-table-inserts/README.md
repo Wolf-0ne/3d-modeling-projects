@@ -10,7 +10,7 @@ test use.
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested: yes; WEN plate is better tested (printer/date not recorded)
+- Physically tested: yes; the WEN plate has more test use
 
 ## Files
 

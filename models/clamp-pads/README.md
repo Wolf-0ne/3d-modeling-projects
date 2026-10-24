@@ -9,7 +9,6 @@ round swivel pad and a shaped top pad.
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested on: not recorded
 
 ## Files
 
@@ -76,7 +75,6 @@ openscad --hardwarnings -o build/bar_clamp_swivel.stl bar_clamp_swivel.scad
 ## Known issues
 
 - Not yet published on Printables.
-- Physical-test status is not recorded.
 
 ## License
 

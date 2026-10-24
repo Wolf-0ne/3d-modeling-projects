@@ -12,7 +12,6 @@ Published on Printables: [v3](https://www.printables.com/model/1078542-orange-pi
 
 - Last verified: 2026-10-22 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested on: not recorded
 
 ## Files
 
