@@ -34,6 +34,7 @@ img/           preview PNGs and photos
 | [Bandsaw Table Inserts](bandsaw-table-inserts/README.md) | wen, rikon | [iso](bandsaw-table-inserts/img/primary/iso.png) | — |
 | [Furniture Foot](furniture-foot/README.md) | single | [iso](furniture-foot/img/primary/iso.png) | — |
 | [CNC Machine Parts](cnc-machine-parts/README.md) | panels, joystick, x-tensioner, x-clamp, y-plate, z-mount, belt-plate | [iso](cnc-machine-parts/img/primary/iso.png) | — |
+| [V620 Fan Shroud](v620-fan-shroud/README.md) | primary, 80mm_75, 80mm_60, 80mm_45, single_slot_40 | [iso](v620-fan-shroud/img/primary/iso.png) | — |
 
 `—` means there is no Printables listing for that model.
 

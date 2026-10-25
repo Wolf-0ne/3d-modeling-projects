@@ -1,0 +1,42 @@
+{
+  "primary": "v620_fan_shroud.scad",
+  "defines": {
+    "use_dual_40": 0,
+    "use_90deg": 1
+  },
+  "variants": {
+    "80mm_75": {
+      "file": "v620_fan_shroud.scad",
+      "defines": {
+        "use_dual_40": 0,
+        "use_90deg": 0,
+        "use_75deg": 1
+      }
+    },
+    "80mm_60": {
+      "file": "v620_fan_shroud.scad",
+      "defines": {
+        "use_dual_40": 0,
+        "use_90deg": 0,
+        "use_75deg": 0,
+        "use_60deg": 1
+      }
+    },
+    "80mm_45": {
+      "file": "v620_fan_shroud.scad",
+      "defines": {
+        "use_dual_40": 0,
+        "use_90deg": 0,
+        "use_75deg": 0,
+        "use_60deg": 0,
+        "use_45deg": 1
+      }
+    },
+    "single_slot_40": {
+      "file": "v620_fan_shroud.scad",
+      "defines": {
+        "use_dual_40": 1
+      }
+    }
+  }
+}

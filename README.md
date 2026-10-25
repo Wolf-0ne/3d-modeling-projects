@@ -16,9 +16,9 @@ published on Printables.
 
 ## Status
 
-- **Last verified**: 2026-10-24 (CNC parts)
-- **Models**: 19
-- **Build check**: `python scripts/check_models.py` checks 52 variants with zero warnings
+- **Last verified**: 2026-10-25 (V620 fan shroud)
+- **Models**: 20
+- **Build check**: `python scripts/check_models.py` checks 57 variants with zero warnings
 
 ## Quick start
 
