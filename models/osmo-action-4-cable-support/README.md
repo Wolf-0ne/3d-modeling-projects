@@ -1,4 +1,4 @@
-# Osmo Action 4 USB-C Cable Support
+# USB-C Cable Support for the DJI Osmo Action 4
 
 A replacement door and cable support for the DJI Osmo Action 4 USB-C port. The
 door captures the cable and reduces strain on the camera's USB-C connector.

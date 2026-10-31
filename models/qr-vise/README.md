@@ -71,6 +71,10 @@ disengage the half nut, so the jaws slide freely.
 The parts are assembled into a four-sided wooden box. A 3/4 in hickory or
 similar hardwood box works; plywood also works.
 
+## Material
+
+PETG for the body and latch; the mechanism carries clamping load.
+
 ## Printing
 
 Print the body and latch in the orientation shown. The design uses the body and

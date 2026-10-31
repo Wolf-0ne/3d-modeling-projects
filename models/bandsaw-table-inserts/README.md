@@ -1,4 +1,4 @@
-# Bandsaw Table Inserts
+# Bandsaw Table Inserts for the Rikon 10-306 and WEN 3939
 
 Table insert plates for the Rikon 10-306 and WEN 3939 bandsaws. Both inserts are
 treated equally; the WEN plate is the primary preview because it has the most

@@ -1,4 +1,4 @@
-# NRadio C2000 Shell
+# Shell for the NRadio C2000
 
 A vented enclosure for the NRadio C2000 LTE modem, designed for modem airflow
 and mounting in an IRL backpack. The current layout is the only published

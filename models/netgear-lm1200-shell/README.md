@@ -1,4 +1,4 @@
-# Netgear LM1200 Shell
+# Shell for the Netgear LM1200
 
 A vented enclosure for the Netgear LM1200 LTE modem, derived from the NRadio
 C2000 enclosure for modem airflow and mounting in a Belabox IRL backpack. The

@@ -18,6 +18,10 @@ through-bolt.
   with it.
 - The nut pocket uses a 11.1125 mm hex width.
 
+## Material
+
+PLA. PETG is an option for higher-torque use of the 1/4 in hardware.
+
 ## Printing
 
 Print flat as oriented. No supports are modeled.

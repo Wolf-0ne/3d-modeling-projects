@@ -31,6 +31,10 @@ Select a variant with `-D variant="elongated"` or `-D variant="square"`.
 
 None. The body has a lid seat; a separate lid is not included in this source.
 
+## Material
+
+PETG.
+
 ## Printing
 
 Print flat on the base. The hexagonal wall openings are vertical; no supports

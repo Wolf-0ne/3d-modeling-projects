@@ -35,6 +35,10 @@ Tube sizes and connector modes are set near the top of the source:
 `tube_outer_diameter`, `tube_inner_diameter`, `connector_top_mode`, and
 `connector_bottom_mode`.
 
+## Material
+
+PETG.
+
 ## Printing
 
 Print the slider and valve flat as oriented. No supports are modeled.

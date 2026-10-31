@@ -24,6 +24,10 @@ and three B-style dogs: small, medium, and large.
 The A-style has a large side notch. The B-style sizes are:
 small 1/4 in, medium 1/2 in, and large 3/4 in.
 
+## Material
+
+PLA. PETG is an option for heavier bench use.
+
 ## Printing
 
 Print upright as oriented. Use enough walls/infill for a stiff dog; the head is

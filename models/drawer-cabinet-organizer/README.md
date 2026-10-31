@@ -41,6 +41,10 @@ The outer dimensions stay 70 x 70 x 35 mm for every variant.
 
 None.
 
+## Material
+
+PLA. PETG is an option if you want a stiffer tray.
+
 ## Printing
 
 Print flat on the base. No supports are modeled; the chamfered outer walls are

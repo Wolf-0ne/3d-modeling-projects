@@ -1,4 +1,4 @@
-# Radxa Rock 5B+ Case
+# Case for the Radxa Rock 5B+
 
 Vented enclosure for the Radxa Rock 5B+ with optional top antenna mounts,
 modem mounting, and 25 mm or 30 mm fan layouts.

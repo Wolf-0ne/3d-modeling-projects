@@ -34,6 +34,11 @@ ones published here.
 
 None.
 
+## Material
+
+PLA. PETG is an option; the sliding lid and stacking contact wear against each
+other.
+
 ## Printing
 
 Print as oriented. Check the sliding-lid and interlock clearances in your slicer;

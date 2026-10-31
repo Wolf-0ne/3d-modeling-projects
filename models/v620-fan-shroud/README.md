@@ -1,4 +1,4 @@
-# V620 Fan Shroud
+# Fan Shroud for the AMD Radeon PRO V620
 
 Printed fan shroud for the passive AMD Radeon PRO V620. It replaces the
 server-chassis airflow path with a standard axial fan, so the card can be used
@@ -21,7 +21,7 @@ shroud.
 | Card | Fit |
 |---|---|
 | Radeon PRO V620 | Tested |
-| Radeon PRO V340L | Compatible with the same opening; test-fit before relying on it |
+| Radeon PRO V340L | Confirmed to work; needs adjusted sizing (same heatsink opening) |
 | Instinct MI50 / MI100 | May fit with tweaks; check the heatsink opening and screw bosses |
 
 The shroud grips the stock heatsink opening by friction. It does not screw to
@@ -81,7 +81,9 @@ openscad --hardwarnings -D use_dual_40=1 -o build/v620_single_slot_40.stl v620_f
 
 ## Known issues
 
-- The V340L, MI50, and MI100 fits have not been physically tested.
+- The MI50 and MI100 fits have not been physically tested.
+- The V340L fit is confirmed to work, but the source here is dimensioned for
+  the V620; a V340L build needs adjusted sizing.
 - The 40 mm version requires the higher-speed S4028-15K; the S4028-6K is not
   recommended.
 

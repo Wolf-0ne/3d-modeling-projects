@@ -1,4 +1,4 @@
-# Thermaltake P3 Vertical GPU Foot
+# GPU Foot for the Thermaltake P3
 
 Custom support foot for a vertically mounted graphics card in a Thermaltake P3
 base or Core. It is a measured, card-specific fit rather than a universal

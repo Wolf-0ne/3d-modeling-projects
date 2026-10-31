@@ -1,4 +1,4 @@
-# Orange Pi 5 Plus Case
+# Case for the Orange Pi 5 Plus
 
 Two source versions of a vented Orange Pi 5 Plus enclosure. `v3` is the newer
 revision; `v2` is kept for the earlier fit.

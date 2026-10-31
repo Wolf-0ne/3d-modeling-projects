@@ -1,4 +1,4 @@
-# TS80P Soldering Kit
+# Soldering Kit for the TS80P Iron
 
 A storage kit for a TS80/TS80P soldering iron, tips, solder, cable, and power
 supply. The dual layout is the primary, actively used version.
@@ -35,6 +35,10 @@ from the current parametric `type` paths.
 ## Hardware
 
 None.
+
+## Material
+
+PETG. Avoid PLA if the iron or tips may be stored still warm.
 
 ## Printing
 
