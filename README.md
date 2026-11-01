@@ -1,6 +1,6 @@
 # 3d-modeling-projects
 
-Collection of **WolfOne**'s 3D-printable models.
+Collection of my 3D-printable models.
 
 Printable STLs for published models are on
 [Printables](https://www.printables.com/@wolfone_17684).
@@ -8,17 +8,16 @@ Printable STLs for published models are on
 ## What this is
 
 This repository holds `.scad` sources, shared libraries, preview images, and the
-scripts used to build and verify them. The only requirements are OpenSCAD and Python.
+scripts used to build and verify them. The only requirements are OpenSCAD and optionally Python.
 
-It deliberately does **not** contain STLs, 3MFs, gcode, slicer profiles, or
-machine-specific print settings. Those are build artifacts; printable files are
-published on Printables.
+I do **not** include STLs, 3MFs, gcode, slicer profiles, or
+machine-specific print settings. My printers are customized and not really representative of standard prusa machines anymore.
 
 ## Status
 
-- **Last verified**: 2026-10-25 (V620 fan shroud)
+- **Last verified**: 2026-10-31 (fan shrouds)
 - **Models**: 20
-- **Build check**: `python scripts/check_models.py` checks 57 variants with zero warnings
+- **Build check**: `python scripts/check_models.py` checks 58 variants with zero warnings
 
 ## Quick start
 
@@ -55,6 +54,49 @@ build/       local STL output, gitignored
 Each model directory contains its source, a `render.json`, a model README, and
 preview images. The index lives in [`models/README.md`](models/README.md) and
 lists only models that are actually present and verified.
+
+## Fonts
+
+`libraries/branding.scad` renders the `byWolfOne` mark with
+`brandFont = "Consolas:style=Bold"`. Consolas ships with Windows; it is not
+bundled here and its glyphs are not redistributed. OpenSCAD has no font-stack
+fallback: a missing font is silently substituted, changing the mark's geometry.
+
+On systems without Consolas, override it:
+
+```bash
+openscad -D brandFont='"DejaVu Sans Mono:style=Bold"' ...
+```
+
+Suggested substitutes: `DejaVu Sans Mono` or `Liberation Mono` (both OFL).
+Fonts are **not** covered by this repository's CC BY 4.0 license. The build
+cache does not hash installed fonts; run `python scripts/check_models.py --all`
+after changing font availability.
+
+## What this repository does not publish
+
+- STLs, 3MFs, gcode, or slicer project files
+- printer profiles or personal machine settings
+- third-party fonts
+- compatibility claims that have not been physically tested
+
+## Support
+
+> [!TIP]
+> If you like my work, check out my [Buy Me a Coffee](https://buymeacoffee.com/wolfone_) link.
+>
+> <a href="https://buymeacoffee.com/wolfone_"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="180"></a>
+
+## Issues
+
+Open an issue for build problems or source errors. Do not attach generated
+artifacts; include the failing command and the warning text.
+
+## License
+
+Models and source are licensed under
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+Attribution: **WolfOne** (@wolfone_17684).
 
 ## Build and preview
 
@@ -108,46 +150,3 @@ python scripts/check_repo.py
 
 This verifies required files, relative links, and local-path leaks. It does not
 require OpenSCAD. Local STLs are ignored by git and are not treated as errors.
-
-## Fonts
-
-`libraries/branding.scad` renders the `byWolfOne` mark with
-`brandFont = "Consolas:style=Bold"`. Consolas ships with Windows; it is not
-bundled here and its glyphs are not redistributed. OpenSCAD has no font-stack
-fallback: a missing font is silently substituted, changing the mark's geometry.
-
-On systems without Consolas, override it:
-
-```bash
-openscad -D brandFont='"DejaVu Sans Mono:style=Bold"' ...
-```
-
-Suggested substitutes: `DejaVu Sans Mono` or `Liberation Mono` (both OFL).
-Fonts are **not** covered by this repository's CC BY 4.0 license. The build
-cache does not hash installed fonts; run `python scripts/check_models.py --all`
-after changing font availability.
-
-## What this repository does not publish
-
-- STLs, 3MFs, gcode, or slicer project files
-- printer profiles or personal machine settings
-- third-party fonts
-- compatibility claims that have not been physically tested
-
-## Support
-
-> [!TIP]
-> If you like my work, check out my [Buy Me a Coffee](https://buymeacoffee.com/wolfone_) link.
->
-> <a href="https://buymeacoffee.com/wolfone_"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me a Coffee" width="180"></a>
-
-## Issues
-
-Open an issue for build problems or source errors. Do not attach generated
-artifacts; include the failing command and the warning text.
-
-## License
-
-Models and source are licensed under
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-Attribution: **WolfOne** (@wolfone_17684).
