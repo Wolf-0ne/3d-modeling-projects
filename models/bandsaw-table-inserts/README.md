@@ -29,12 +29,24 @@ test use.
 
 Both inserts are supported, not a ranked primary/variant pair.
 
+## Dimensions
+
+- Rikon 10-306: 60.2 mm diameter, 3 mm plate; the eight locating tabs
+  bring it to 3.6 mm as printed. File the tabs for a flush fit on your
+  saw — bed castings vary. 1.8 x 35 mm blade slot; tabs offset 22.5
+  degrees.
+- WEN 3939: about 26 x 56 x 6 mm as printed (25 x 55 x 5 mm before the
+  edge rounding); 5 x 35 mm slot.
+
+## Hardware
+
+None.
+
 ## Fit notes
 
 Both inserts have been tested. Machine-bed castings vary, so the inserts may
-need hand filing or light fitting to sit flush. The source comments keep the
-per-saw fit notes; adjust the tab heights and edges to your machine. Because
-they are printed, they are inexpensive to replace if the fit is not right.
+need hand filing or light fitting to sit flush — adjust the tab heights
+and edges to your machine
 
 ## Material
 
@@ -50,12 +62,6 @@ Print flat as oriented. No supports are modeled.
 ```bash
 python scripts/check_models.py --model bandsaw-table-inserts
 python scripts/render_previews.py models/bandsaw-table-inserts --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/wen_table_insert.stl wen_3939_table_insert.scad
 ```
 
 ## Known issues

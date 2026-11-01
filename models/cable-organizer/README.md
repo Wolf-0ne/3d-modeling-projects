@@ -25,19 +25,16 @@ Under-desk cable organizer with three cable slots and screw-mounting holes.
 - Two mounting holes, 2.6 mm diameter, 32.6 mm apart, with a 4 mm clearance slot.
 - Mounting plate: 20 mm long, 55 mm wide tapering to 35 mm.
 
-## Installation
-
-Mount under the desk with two flat-head Phillips screws. The screw size is not
-specified; check the 2.6 mm holes against your screws. Feed the cables into the
-slots before mounting. Once the organizer is screwed to the underside, the desk
-closes the open side and the cables cannot slide out. Changing cables requires
-removing the organizer.
-
 ## Hardware
 
 | Item | Qty | Notes |
 |---|---|---|
 | Flat-head Phillips screw | 2 | Size not specified; must fit the 2.6 mm mounting holes. |
+
+## Installation
+
+Mount under the desk with two flat-head screws. Feed the cables into the
+slots before mounting. Changing cables requires removing the organizer. I do plan to revise this and come up with something more elegant eventually but it's a quick functional print.
 
 ## Material
 
@@ -51,20 +48,13 @@ Print flat as oriented. No supports are modeled.
 
 ```bash
 python scripts/check_models.py --model cable-organizer
-python scripts/render_previews.py models/cable-organizer
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/cable_organizer.stl cable_organizer.scad
+python scripts/render_previews.py models/cable-organizer --all
 ```
 
 ## Known issues
 
 - Not yet published on Printables.
-- The current design has no quick-release; cable changes require removing the
-  organizer.
+- The current design has no quick-release.
 
 ## License
 

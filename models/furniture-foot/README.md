@@ -23,9 +23,15 @@ equipment foot.
 - Base diameter: 20 mm.
 - Top diameter: 15 mm.
 - Height: 6 mm.
-- Center recess for a screw head.
+- Center 6 mm through-hole for a screw shank, with a 10 mm recess
+  (2 mm deep) for the screw head.
 
 The model can be scaled for different hardware and furniture sizes.
+
+## Hardware
+
+A screw through the 6 mm center hole; the head seats in the 10 mm
+recess.
 
 ## Material
 
@@ -39,13 +45,7 @@ Print as oriented. No supports are modeled.
 
 ```bash
 python scripts/check_models.py --model furniture-foot
-python scripts/render_previews.py models/furniture-foot
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/furniture_foot.stl furniture_foot.scad
+python scripts/render_previews.py models/furniture-foot --all
 ```
 
 ## Known issues

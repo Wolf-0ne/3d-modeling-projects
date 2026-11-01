@@ -2,8 +2,7 @@
 
 A chamfered, open-top organizer tray for drawers and cabinets. It was designed
 for metal cabinet drawers and small parts such as screws and nails; it also
-works standalone in a drawer. The outer footprint is 70 x 70 x 35 mm;
-`divisions` sets the number of internal compartments from 1 to 4.
+works standalone in a drawer.
 
 Published on [Printables](https://www.printables.com/model/314660-drawer-cabinet-organizer).
 
@@ -37,6 +36,11 @@ Published on [Printables](https://www.printables.com/model/314660-drawer-cabinet
 
 The outer dimensions stay 70 x 70 x 35 mm for every variant.
 
+## Dimensions
+
+Outer footprint: 70 x 70 x 35 mm with 2.5 mm walls. Divided into 1–4
+compartments (default 2); the dividers match the wall thickness.
+
 ## Hardware
 
 None.
@@ -55,12 +59,6 @@ self-supporting. Check the divider height in your slicer before printing.
 ```bash
 python scripts/check_models.py --model drawer-cabinet-organizer
 python scripts/render_previews.py models/drawer-cabinet-organizer --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -D divisions=2 -o build/tray_organizer.stl tray_organizer.scad
 ```
 
 ## Known issues

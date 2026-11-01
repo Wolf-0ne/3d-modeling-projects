@@ -32,6 +32,15 @@ Published on [Printables](https://www.printables.com/model/314754-ts80p-solderin
 The legacy file is kept separate because its body and opening layout differ
 from the current parametric `type` paths.
 
+## Dimensions
+
+- Overall: 65 x 117 x 43 mm (dual), 65 x 102 x 43 mm (single),
+  65 x 118 x 43 mm (legacy).
+- Iron openings: 14.5 mm diameter (15 mm in the legacy layout).
+- Tip openings: 9 mm diameter.
+- Walls 2.5 mm. Zones: solder 22 mm, power 31 mm, storage 34 mm
+  (dual) or 39 mm (single), cable 17.5 mm (dual only).
+
 ## Hardware
 
 None.
@@ -49,13 +58,6 @@ Print flat on the base. The current source does not model supports.
 ```bash
 python scripts/check_models.py --model ts80p-soldering-kit
 python scripts/render_previews.py models/ts80p-soldering-kit --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -D type="dual" -o build/soldering_kit.stl soldering_kit.scad
-openscad --hardwarnings -o build/soldering_kit_legacy.stl soldering_kit_legacy.scad
 ```
 
 ## Known issues

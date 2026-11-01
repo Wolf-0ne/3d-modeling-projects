@@ -32,9 +32,21 @@ Published on [Printables](https://www.printables.com/model/617365-osmo-action-4-
 
 All variants share the same 19.3 x 22.9 mm footprint.
 
+## Dimensions
+
+- Top plate (shared by all variants): 19.3 x 22.9 mm.
+- Overall height: 7.0 mm standard, 9.0 mm medium, 11.0 mm large.
+- USB-C opening through the door: 6.5 x 11.5 mm.
+
 ## Hardware
 
 None.
+
+## Installation
+
+The door snaps into the camera's USB-C port recess; the latch at
+the front edge holds it in place. Once installed, the door
+captures the cable and reduces strain on the connector.
 
 ## Material
 
@@ -52,12 +64,6 @@ machine-specific settings are published.
 ```bash
 python scripts/check_models.py --model osmo-action-4-cable-support
 python scripts/render_previews.py models/osmo-action-4-cable-support --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -D large=0 -o build/OA4_USBC_Door.stl OA4_USBC_Door.scad
 ```
 
 ## Known issues

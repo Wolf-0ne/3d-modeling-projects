@@ -12,17 +12,31 @@ and three B-style dogs: small, medium, and large.
 
 ## Design notes
 
-- The center hole lets a screw sink in and hold the dog more securely.
+- The center hole lets you re-inforce with a screw or small metal rod. I personally sank a 4" screw through a small piece of wood and use that to pull them out of the bench.
 - Without a screw, the dogs can be used as sacrificial dogs for planers and
   routers.
-- Print at high density for strength. These parts take side loads at the head.
+- Print at highish density for strength.
 - The notch and screw-slot corners are rounded. Sharp internal corners are
   stress points.
-- Each stem has a torus-relieved collar at its base. The collar adds material
-  at the stem-to-base edge, then a donut-shaped cutter leaves a 1.5 mm fillet.
 
 The A-style has a large side notch. The B-style sizes are:
 small 1/4 in, medium 1/2 in, and large 3/4 in.
+
+## Dimensions
+
+| Dog | Height | Head |
+|---|---:|---|
+| A | 45 mm (51 mm overall) | 19 mm stem with a side notch and a slightly flared base |
+| B small | 30 mm | 23 mm |
+| B medium | 30 mm | 26 mm |
+| B large | 35 mm | 30 mm |
+
+All stems are 19 mm (3/4 in) and slip into a standard bench dog hole. The
+center screw slot is 3 mm wide by 15 mm tall.
+
+## Hardware
+
+One drywall screw per dog (optional) through the 3 mm center for rigidity, can adjust size for whatever screws. Also the feature is there to force additional inner walls for strength when printing.
 
 ## Material
 
@@ -37,13 +51,7 @@ the loaded end. No supports are modeled.
 
 ```bash
 python scripts/check_models.py --model bench-dogs
-python scripts/render_previews.py models/bench-dogs
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/bench_dogs.stl bench_dogs.scad
+python scripts/render_previews.py models/bench-dogs --all
 ```
 
 ## Known issues

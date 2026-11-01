@@ -25,8 +25,7 @@ shroud.
 | Instinct MI50 / MI100 | May fit with tweaks; check the heatsink opening and screw bosses |
 
 The shroud grips the stock heatsink opening by friction. It does not screw to
-the card. Check the opening, backplate, and power-connector clearance before
-printing for another card.
+the card.
 
 ## Fans
 
@@ -51,6 +50,20 @@ increase only if the card is still throttling.
 | `80mm_45` | 1× 80 mm, 45° | Lowest-profile 80 mm angle |
 | `single_slot_40` | 2× 40 mm | Single-slot alternate, S4028-15K |
 
+## Dimensions
+
+| Item | Size |
+|---|---|
+| Primary (90°) | 104.0 x 83.5 x 79.0 mm (45° variant is tallest at 105.6 mm) |
+| Card opening | about 99.3–99.5 x 38.4 mm, 18 mm deep |
+| Airflow duct opening | about 91.5 x 38 mm (single-slot version: about 26 mm tall) |
+| 8-pin power cutout | 38.7 x 11.5 mm, 14 mm deep |
+| 80 mm fan opening | about 80 mm wide, 8 mm deep |
+| 40 mm fan openings (single-slot) | about 40 x 80 mm each, 20 mm deep |
+
+Other fan angles (75/60/45°) and the single-slot version have slightly
+different overall sizes.
+
 ## Power connectors
 
 The V620 has two 8-pin power connectors. The shroud has a cable relief around
@@ -72,11 +85,8 @@ the fit before forcing it into place.
 ## Build
 
 ```bash
-openscad --hardwarnings -D use_dual_40=0 -D use_90deg=1 -D use_75deg=0 -o build/v620_80mm.stl v620_fan_shroud.scad
-openscad --hardwarnings -D use_dual_40=0 -D use_90deg=0 -D use_75deg=1 -o build/v620_80mm_75.stl v620_fan_shroud.scad
-openscad --hardwarnings -D use_dual_40=0 -D use_90deg=0 -D use_60deg=1 -o build/v620_80mm_60.stl v620_fan_shroud.scad
-openscad --hardwarnings -D use_dual_40=0 -D use_90deg=0 -D use_45deg=1 -o build/v620_80mm_45.stl v620_fan_shroud.scad
-openscad --hardwarnings -D use_dual_40=1 -o build/v620_single_slot_40.stl v620_fan_shroud.scad
+python scripts/check_models.py --model v620-fan-shroud
+python scripts/render_previews.py models/v620-fan-shroud --all
 ```
 
 ## Known issues

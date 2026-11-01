@@ -71,6 +71,35 @@ disengage the half nut, so the jaws slide freely.
 The parts are assembled into a four-sided wooden box. A 3/4 in hickory or
 similar hardwood box works; plywood also works.
 
+## Dimensions
+
+| Item | Size |
+|---|---|
+| Threaded rod | 5/8 in |
+| Half-nut interface | 26.7 x 32 mm hex |
+| Magnet | 1 in dia x 9 mm |
+| Steel pin | 8 mm dia (6 mm also works) |
+| Latch | 25 mm long, 3.5 mm loose-pin bore |
+| Body and latch | 63 mm along the rod axis |
+
+The body also carries two 3 mm set-screw bores for the half nut.
+
+## Hardware
+
+The printed body and latch are not the whole assembly. Per the mechanism
+above, you also need a 5/8 in threaded rod, a 26.7 x 32 mm half nut (cut
+a 5/8 in nut in half), a 1 in x 9 mm magnet, an 8 mm steel pin (6 mm
+should work), and a small loose pin or framing nail.
+
+## Installation
+
+Build the four-sided wooden box first (3/4 in hardwood or plywood, sized
+to the bench and rod). Make a half nut for your size of threaded rod ( easier said then done ). Glue the half nut into the housing at the rod
+line, then fit the body and latch so the magnet sits opposite the steel
+pin. Join the latch to the body with the loose pin, and check that
+turning right locks the half nut and turning left disengages it before
+fixing the box to the bench.
+
 ## Material
 
 PETG for the body and latch; the mechanism carries clamping load.
@@ -87,12 +116,6 @@ parts.
 ```bash
 python scripts/check_models.py --model qr-vise
 python scripts/render_previews.py models/qr-vise --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -D 'display="body"' -o build/qr_vise_body.stl qr_vise.scad
 ```
 
 ## Known issues

@@ -52,13 +52,7 @@ Print as oriented. No supports are modeled.
 
 ```bash
 python scripts/check_models.py --model thermaltake-p3-gpu-foot
-python scripts/render_previews.py models/thermaltake-p3-gpu-foot
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/thermaltake_p3_gpu_foot.stl thermaltake_p3_gpu_foot.scad
+python scripts/render_previews.py models/thermaltake-p3-gpu-foot --all
 ```
 
 ## Known issues

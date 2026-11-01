@@ -54,6 +54,21 @@ The top pad is resized through its own dimensions: `totalWidth`,
 `cylinderOffset`, `wallThickness`, `topWallThickness`, `footHeight`, and
 `baseThickness`.
 
+## Dimensions
+
+| Part | Size (default) |
+|---|---|
+| Swivel pad | 26.5 x 26.5 x 9.5 mm |
+| Top pad | 40 x 27 x 10 mm |
+
+The swivel pad is a ring that wraps around the clamp bar through a
+4.5 mm slot. Both pads are resizeable — see the reference tables above
+for the sizing values.
+
+## Hardware
+
+None. The pads snap over the bar or clamp cup by geometry; no fasteners or glue is required.
+
 ## Printing
 
 Both parts are intended for TPU. Print them in the orientation shown and test
@@ -64,12 +79,6 @@ the fit before printing a full set. No supports are modeled.
 ```bash
 python scripts/check_models.py --model clamp-pads
 python scripts/render_previews.py models/clamp-pads --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/bar_clamp_swivel.stl bar_clamp_swivel.scad
 ```
 
 ## Known issues

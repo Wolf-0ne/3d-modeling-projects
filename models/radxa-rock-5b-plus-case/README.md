@@ -47,15 +47,28 @@ The source defaults remain `sma=0 modemMount=0`, matching the public source.
 -D pcb=0|1            # show PCB reference
 ```
 
+## Dimensions
+
+| Part | Overall |
+|---|---|
+| Full case (primary: 30 mm fans, 2 SMA, modem) | 113 x 135.2 x 35.2 mm |
+
+The `fan25` variant reduces the height for 25 mm fans; `shrink`
+removes the top fan space entirely. Exact per-variant sizes are not
+verified.
+
 ## Hardware
 
 | Item | Qty | Notes |
 |---|---|---|
-| Flat M3x6 screw | 4 | Lid |
+| Flat M3 screw | 4 | Lid; pick a length that clears the wall |
 | Self-tapping screw | 2 | Approx. M2.5 x 6 mm; board alignment pegs |
 | 30 x 10 mm or 25 x 10 mm fan | 1 | Fan position depends on variant |
-| SMA antenna | Optional | Side-grid or lid mounts on some variants |
 | Modem carrier board | Optional | May need auxiliary power |
+
+Antenna mounts: some variants include SMA connector mounts in the
+side grid or on the lid (`-D sma=2` or `-D sma=4`); fit an antenna
+or connector there as needed.
 
 The board is aligned by body pegs. Some variants support an internal modem;
 check the carrier-board dimensions and power requirement.
@@ -75,12 +88,6 @@ bed. Some cleanup may be needed.
 ```bash
 python scripts/check_models.py --model radxa-rock-5b-plus-case
 python scripts/render_previews.py models/radxa-rock-5b-plus-case --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -D sma=2 -D modemMount=1 -o build/rock5b.stl rock5bplus_model.scad
 ```
 
 ## Known issues

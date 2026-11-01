@@ -30,6 +30,11 @@ thread-tap insert is included as an optional variation.
 and `divisions` (0-4) for custom builds. The declared variants above are the
 ones published here.
 
+## Dimensions
+
+Overall size: 45 x 90 x 35 mm; the thread-tap insert is 40 x 80 x 16.6 mm
+(both listed in the Variants table).
+
 ## Hardware
 
 None.
@@ -49,13 +54,6 @@ they depend on the printer and material.
 ```bash
 python scripts/check_models.py --model stackable-box
 python scripts/render_previews.py models/stackable-box --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/stackable_box.stl stackable_box.scad
-openscad --hardwarnings -o build/thread_tap_box.stl thread_tap_box.scad
 ```
 
 ## Known issues

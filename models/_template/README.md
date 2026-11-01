@@ -26,6 +26,10 @@ model, then generate `img/primary/iso.png` with `render_previews.py`.
 |---|---|---|
 | primary | `model.scad` | default |
 
+## Dimensions
+
+<!-- Document overall dimensions and any critical clearances. -->
+
 ## Hardware
 
 | Item | Qty | Notes |
@@ -33,6 +37,10 @@ model, then generate `img/primary/iso.png` with `render_previews.py`.
 | | | |
 
 Assembly notes, fasteners, inserts, and any non-print parts.
+
+## Installation
+
+<!-- Steps to assemble or fit the model, if applicable. -->
 
 ## Printing
 

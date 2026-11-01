@@ -41,14 +41,22 @@ Select parts and options with:
 
 `fanonly` is `part="lid" modem=false`; `nofan` is `fan=false`.
 
+## Dimensions
+
+| Part | Overall |
+|---|---|
+| Body + lid (`full`) | 114 x 114 x 27.5 mm |
+| Lid only | 114 x 114 x 3.0 mm |
+
 ## Hardware
 
 | Item | Qty | Notes |
 |---|---|---|
-| M3 screw | 4 | Lid; length not stated |
-| M3x15 screw | 4 | Optional 30 mm fan |
+| Screw | 4 | Lid; fits the 2.9 mm corner holes |
+| Screw | 4 | Optional 30 mm fan; fits the 2.9 mm holes |
 
-The modem board is press-fit and uses the existing modem mounting points.
+The modem board seats on modeled pilot pins; the source does not model board
+screw holes, so retention method for the board itself is not specified.
 
 ## Material
 
@@ -63,14 +71,6 @@ Print the body and lid flat as oriented. No supports are modeled.
 ```bash
 python scripts/check_models.py --model nradio-c2000-shell
 python scripts/render_previews.py models/nradio-c2000-shell --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/nradio_full.stl nradio_enclosure.scad
-openscad --hardwarnings -D part="lid" -D modem=false -o build/nradio_fanonly.stl nradio_enclosure.scad
-openscad --hardwarnings -D fan=false -o build/nradio_nofan.stl nradio_enclosure.scad
 ```
 
 ## Known issues

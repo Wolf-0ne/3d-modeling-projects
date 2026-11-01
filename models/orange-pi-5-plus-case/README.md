@@ -32,13 +32,28 @@ Published on Printables: [v3](https://www.printables.com/model/1078542-orange-pi
 
 The lid is shown with the fan mount. Without it the lid is 5.2 mm tall.
 
+## Dimensions
+
+| Part | Overall |
+|---|---|
+| v3 body | 89.7 x 114.4 x 25.2 mm |
+| v2 body | 86.4 x 114.4 x 25.2 mm |
+| v3 lid (fan mount) | 86.4 x 114.4 x 7.5 mm |
+| v2 lid (fan mount) | 86.4 x 114.4 x 7.5 mm |
+| Lid without fan mount | 5.2 mm tall |
+
+Lid screws: 4 flat M3 at the corners (`v3` may use 5 or 6 depending on
+the build). The lid fan mount is a 22 mm round bore with three screw
+bosses; no fan screws are modeled. The optional 5 V 3007 fan (per the
+Printables listing) fits this mount.
+
 ## Hardware
 
 | Item | Qty | Notes |
 |---|---|---|
 | Flat M3 screw | 4 | v2 lid |
 | Flat M3 screw | 5 or 6 | v3 lid |
-| 5 V 3007 fan | 1 | Optional; press-fit in the lid fan mount |
+| 5 V 3007 fan | 1 | Optional; fits the lid fan mount (per Printables listing) |
 
 The board is press-fit. `v3` may need light cleanup depending on the printer.
 
@@ -72,14 +87,6 @@ python scripts/check_models.py --model orange-pi-5-plus-case
 python scripts/render_previews.py models/orange-pi-5-plus-case --all
 ```
 
-Or directly:
-
-```bash
-openscad --hardwarnings -o build/opi_v3_body.stl orange_pi_enclosure_v3.scad
-openscad --hardwarnings -D part="top" -o build/opi_v3_top.stl orange_pi_enclosure_v3.scad
-openscad --hardwarnings -D part="full" -o build/opi_v3_full.stl orange_pi_enclosure_v3.scad
-openscad --hardwarnings -D part="top" -o build/opi_v2_top.stl orange_pi_enclosure_v2.scad
-```
 
 ## Known issues
 

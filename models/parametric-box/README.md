@@ -27,6 +27,11 @@ default; the square profile is the same model in a shorter, wider body.
 
 Select a variant with `-D variant="elongated"` or `-D variant="square"`.
 
+## Dimensions
+
+Overall size: 96.6 x 143.5 x 51 mm (elongated, default) or
+96.6 x 96.6 x 52 mm (square); both listed in the Variants table.
+
 ## Hardware
 
 None. The body has a lid seat; a separate lid is not included in this source.
@@ -45,12 +50,6 @@ are modeled.
 ```bash
 python scripts/check_models.py --model parametric-box
 python scripts/render_previews.py models/parametric-box --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -D variant="elongated" -o build/parametric_box.stl parametric_box.scad
 ```
 
 ## Known issues

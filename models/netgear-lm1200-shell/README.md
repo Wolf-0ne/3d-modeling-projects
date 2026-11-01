@@ -32,14 +32,24 @@ Published on [Printables](https://www.printables.com/model/771215-netgear-lm1200
 
 Select a part with `-D part="body"`, `-D part="lid"`, or `-D part="full"`.
 
+## Dimensions
+
+| Part | Overall |
+|---|---|
+| Body | 115 x 112 x 20.6 mm |
+| Lid | 115 x 112 x 10.0 mm |
+| Full assembly | 115 x 112 x 29.6 mm |
+
 ## Hardware
 
 | Item | Qty | Notes |
 |---|---|---|
-| M3 screw | 4 | Lid; length not stated |
-| M3x15 screw | 4 | Optional 30 mm fan |
+| Screw | 4 | Modem board; fits the 5.6 mm post holes |
+| Screw | 4 | Lid; fits the 3.2 mm corner holes |
+| Screw | 4 | Optional 30 mm fan; fits the 2.9 mm holes |
 
-The modem board is press-fit and uses the existing modem mounting points.
+Screw sizes and lengths are not stated in the source; match them to the
+holes.
 
 ## Material
 
@@ -54,13 +64,6 @@ Print the body and lid flat as oriented. No supports are modeled.
 ```bash
 python scripts/check_models.py --model netgear-lm1200-shell
 python scripts/render_previews.py models/netgear-lm1200-shell --all
-```
-
-Or directly:
-
-```bash
-openscad --hardwarnings -D part="body" -o build/lm1200_body.stl lm1200_enclosure.scad
-openscad --hardwarnings -D part="lid" -o build/lm1200_lid.stl lm1200_enclosure.scad
 ```
 
 ## Known issues

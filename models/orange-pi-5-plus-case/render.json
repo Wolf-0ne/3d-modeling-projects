@@ -6,6 +6,12 @@
       "file": "orange_pi_enclosure_v2.scad",
       "defines": {}
     },
+    "v3_full": {
+      "file": "orange_pi_enclosure_v3.scad",
+      "defines": {
+        "part": "full"
+      }
+    },
     "v3_top": {
       "file": "orange_pi_enclosure_v3.scad",
       "defines": {
