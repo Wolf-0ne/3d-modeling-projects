@@ -19,9 +19,9 @@ wallThickness = 1.8;
 // V620: as built, card-tested. V340L: the cavity grips the cooler shroud
 // while the wider PCB edge passes through a relief band in the cavity wall
 // (see Card opening).
-v340l_cavityWidth  = 97.1;  // cavity width (cooler shroud grip)
-v340l_cavityHeight = 39.4;  // cavity height (backplate face to slot top)
-v340l_pcbWidth     = 98.9;  // PCB relief band width
+v340l_cavityWidth  = 97;  // cavity width (cooler shroud grip)
+v340l_cavityHeight = 39.3;  // cavity height (backplate face to slot top)
+v340l_pcbWidth     = 98.8;  // PCB relief band width
 v340l_pcbStart     = 2.6;   // PCB underside above backplate face
 v340l_pcbThk       = 1.7;   // PCB thickness
 v340l_pcbRelief    = 1.2;   // extra relief height around the PCB band (total)
@@ -47,11 +47,11 @@ flip      = use_dual_40 ? 0  : use_flip;
 fanWidth = 79.7;
 
 // Fan depth: 80mm=8, 40mm=20
-fanHeight = use_dual_40 ? 20 : 8;
+fanHeight = use_dual_40 ? 14 : 8;
 
 // Fan offset per angle.
 fanOffSet = use_dual_40
-    ? [0, -69, 0]
+    ? [0, -64, 0]
     : (use_90deg
         ? [0, -65,   8 * (flip == 0 ? 1 : -1)]   // 90°
         : (use_75deg
@@ -102,7 +102,7 @@ cutout_fraction = 0.35;
 
 ramp_start_z   = -14;
 ramp_start_y   = -innerDepth/2 - wt_gap - 0.12;
-cutout_start_z = use_dual_40 ? -innerDepth/2 + 4 : -innerDepth/2 - 10;
+cutout_start_z = use_dual_40 ? -innerDepth/2 + 2 : -innerDepth/2 - 10;
 
 ramp_end_z   = ramp_start_z   + (fan_center_world.z - ramp_start_z)   * ramp_fraction   - (use_steep ? 2 : 0);
 cutout_end_z = cutout_start_z + (fan_center_world.z - cutout_start_z) * cutout_fraction - (use_steep ? 2 : 0);
@@ -122,7 +122,7 @@ difference(){
     union(){
 
         // Flow ramp (flip=0 only)
-        if (flip == 0){
+        if (flip == 0 && use_dual_40 == 0){
 						hull(){
 								translate([0, ramp_start_y, ramp_start_z])
 										cube(lowerRedirect + [-2, 0, 0], center = true);
@@ -153,7 +153,7 @@ difference(){
 						// V340L PCB relief: local slot in the cavity wall across the PCB
 						// band, so the wider PCB edge passes while the cooler shroud stays
 						// clamped. Backplate side = -Z (same as the 8-pin cutout).
-												if (use_v340l){
+						if (use_v340l){
 							translate([0, 0, -innerHeight/2 + v340l_pcbStart + v340l_pcbThk/2])
 								cube([v340l_pcbWidth, outerDepth * 1.01, v340l_pcbThk + v340l_pcbRelief], center = true);
 						}
@@ -259,10 +259,10 @@ difference(){
                 translate([pcie_8pin_x, -innerDepth + 1.5, -innerDepth/2 - 5])
                     cube(pcie_8pin_d + [0, -11, -10.01], center = true);
                 translate([pcie_8pin_x, -innerDepth + 4, -innerDepth/2 - 0.5])
-                    cube(pcie_8pin_d + [0, -3, (use_v340l == 1 ? -9.01 : -12.01)], center = true);
+                    cube(pcie_8pin_d + [0, -3, (use_v340l == 1 ? -8.01 : -12.01)], center = true);
 								translate([pcie_8pin_x, -innerDepth + 4.5, -innerDepth/2 - 5])
                     cube(pcie_8pin_d + [-9, -2, -4.01], center = true);
-								translate([pcie_8pin_x, -innerDepth-3, -innerDepth/2 - 10])
+								translate([pcie_8pin_x, -innerDepth-3 - (use_v340l == 1 ? 4 : 0), -innerDepth/2 - 10 - (use_v340l == 1 ? 2 : 0)])
                     cube(pcie_8pin_d + [-9, 4, -12.01], center = true);
             }
             translate([0, -6, 0])
