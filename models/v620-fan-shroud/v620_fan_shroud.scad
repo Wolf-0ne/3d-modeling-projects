@@ -2,6 +2,7 @@
 // By WolfOne_
 //
 // Print: 80mm rotates 180° (slot down). 40mm no rotation (fan face down).
+// Card: use_v340l selects V340L slot sizing (V620 by default).
 
 use_dual_40  		 = 0;   // 0=single 80mm, 1=dual 40mm (locks 90°, ignores others)
 use_45deg    		 = 0;   // 0=off, 1=45° fan angle (80mm only)
@@ -10,17 +11,32 @@ use_75deg    		 = 0;   // 0=off, 1=75° fan angle (80mm only)
 use_90deg    		 = 1;   // 0=off, 1=90° fan angle (80mm only)
 use_flip     		 = 0;   // 0=normal, 1=mirrored (80mm only)
 use_cable_shroud = 1;   // 0=off, 1=shroud over cable opening
+use_v340l        = 0;   // 0=V620 (tested), 1=V340L slot sizing
 
-wallThickness = 1.9;
+wallThickness = 1.8;
 
 // Card slot (GPU fit)
-innerWidth  = 99.3;      //99.5
+// V620: as built, card-tested. V340L: the cavity grips the cooler shroud
+// while the wider PCB edge passes through a relief band in the cavity wall
+// (see Card opening).
+v340l_cavityWidth  = 97.1;  // cavity width (cooler shroud grip)
+v340l_cavityHeight = 39.4;  // cavity height (backplate face to slot top)
+v340l_pcbWidth     = 98.9;  // PCB relief band width
+v340l_pcbStart     = 2.6;   // PCB underside above backplate face
+v340l_pcbThk       = 1.7;   // PCB thickness
+v340l_pcbRelief    = 1.2;   // extra relief height around the PCB band (total)
+v340l_ductTop      = 0.4;   // duct mouth: capture at the top edge
+v340l_ductBottom   = 2.5;   // duct mouth: cut at the bottom edge
+
+innerWidth  = use_v340l ? v340l_cavityWidth : 99.3;   // V620: measured 99.5, modeled 99.3
 innerDepth  = 18;
-innerHeight = 38.4;
+innerHeight = use_v340l ? v340l_cavityHeight : 38.4;  // V620 cavity height
 
 // Airflow duct (flow path only)
-innerDuctWidth  = 94.3;  // was 99.3 (-5mm total / -2.5mm per side)
-innerDuctHeight = 38;  // was 38.4 (-1mm)
+innerDuctWidth  = innerWidth - (use_v340l ? 1 : 5);   // V620: 94.3 (-5mm total / -2.5mm per side), V340L much thinner shroud
+innerDuctHeight = innerHeight - 0.4   // V620: 38
+    - (use_v340l ? v340l_ductBottom - v340l_ductTop : 0);  // V340L: mouth shortened at the bottom
+ductLiftZ       = use_v340l ? (v340l_ductBottom + v340l_ductTop) / 2 : 0;  // duct mouth center lift
 
 // Derived from flags
 fan_size  = use_dual_40 ? 40 : 80;
@@ -134,6 +150,14 @@ difference(){
 						// Card opening
 						cube([innerWidth, outerDepth * 1.01, innerHeight], center = true);
 
+						// V340L PCB relief: local slot in the cavity wall across the PCB
+						// band, so the wider PCB edge passes while the cooler shroud stays
+						// clamped. Backplate side = -Z (same as the 8-pin cutout).
+												if (use_v340l){
+							translate([0, 0, -innerHeight/2 + v340l_pcbStart + v340l_pcbThk/2])
+								cube([v340l_pcbWidth, outerDepth * 1.01, v340l_pcbThk + v340l_pcbRelief], center = true);
+						}
+
 						// Fan opening
 						translate(fanOffSet)
 						rotate([fan_angle, 0, 0])
@@ -142,7 +166,7 @@ difference(){
 						// Flow path
 						if (use_dual_40 == 1){
 							hull(){
-								translate([0, -innerDepth/2 - wallThickness, flow_throat_z+6])
+								translate([0, -innerDepth/2 - wallThickness, flow_throat_z+6+ductLiftZ])
 									cube([innerDuctWidth - wallThickness/2, wallThickness/4, innerDuctHeight - 12 + wallThickness/4] - [wallThickness, 0, wallThickness], center = true);
 								translate(fanOffSet)
 								rotate([fan_angle, 0, 0])
@@ -155,7 +179,7 @@ difference(){
 								}
 							}
 							hull(){
-								translate([0, -innerDepth/2 - wallThickness, flow_throat_z+6])
+								translate([0, -innerDepth/2 - wallThickness, flow_throat_z+6+ductLiftZ])
 									cube([innerDuctWidth - wallThickness/2, wallThickness/4, innerDuctHeight - 12 + wallThickness/4] - [wallThickness, 0, wallThickness], center = true);
 								translate(fanOffSet)
 								rotate([fan_angle, 0, 0])
@@ -171,11 +195,11 @@ difference(){
 						else {
 							hull(){
 								if (flip == 0){
-									translate([0, -innerDepth/2 - wallThickness, flow_throat_z])
+									translate([0, -innerDepth/2 - wallThickness, flow_throat_z+ductLiftZ])
 										cube([innerDuctWidth - wallThickness/2, wallThickness/4, innerDuctHeight + wallThickness/4] - [wallThickness, 0, wallThickness], center = true);
 								}
 								else {
-									translate([0, -innerDepth/2 - wallThickness*2, 5.5])
+									translate([0, -innerDepth/2 - wallThickness*2, 5.5+ductLiftZ])
 									cube([innerDuctWidth - wallThickness/2, wallThickness/4, innerDuctHeight + wallThickness/4] - [wallThickness, 0, 13], center = true);
 								}
 
@@ -187,7 +211,7 @@ difference(){
 
 							}
 							if (flip == 1){
-								translate([0, -innerDepth/2 - wallThickness, 5.5])
+								translate([0, -innerDepth/2 - wallThickness, 5.5+ductLiftZ])
 									cube([innerDuctWidth - wallThickness/2, wallThickness*2, innerDuctHeight + wallThickness/4] - [wallThickness, 0, 13], center = true);
 							}
 						}
@@ -196,7 +220,7 @@ difference(){
         }
 				
 				// Cable Shroud		
-				translate([0, 0, 0])
+				translate([0, (use_v340l == 1 ? -1 : 0), (use_v340l == 1 ? 1.5 : 0)])
 				hull(){
 						translate([pcie_8pin_x, -innerDepth - 11, -innerDepth/2 - 8.3])
 								cube(pcie_8pin_db + [-9+wallThickness*2, 0, 0], center = true);
@@ -209,8 +233,8 @@ difference(){
     union(){
 
         // 45° ramp cutout
-        cubert = 7.3;
-        translate([0, -innerDepth/2 - wallThickness - 0.1, ramp_cutout_z])
+        cubert = (use_v340l == 1 ? 9.2 : 7.3);
+        translate([0, -innerDepth/2 - wallThickness - 0.1, (use_v340l == 1 ? ramp_cutout_z + .8 : ramp_cutout_z)])
         rotate([45,0,0])
             cube([innerWidth, cubert, cubert], center = true);
 
@@ -235,7 +259,7 @@ difference(){
                 translate([pcie_8pin_x, -innerDepth + 1.5, -innerDepth/2 - 5])
                     cube(pcie_8pin_d + [0, -11, -10.01], center = true);
                 translate([pcie_8pin_x, -innerDepth + 4, -innerDepth/2 - 0.5])
-                    cube(pcie_8pin_d + [0, -3, -12.01], center = true);
+                    cube(pcie_8pin_d + [0, -3, (use_v340l == 1 ? -9.01 : -12.01)], center = true);
 								translate([pcie_8pin_x, -innerDepth + 4.5, -innerDepth/2 - 5])
                     cube(pcie_8pin_d + [-9, -2, -4.01], center = true);
 								translate([pcie_8pin_x, -innerDepth-3, -innerDepth/2 - 10])
