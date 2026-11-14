@@ -13,7 +13,7 @@ use_flip     		 = 0;   // 0=normal, 1=mirrored (80mm only)
 use_cable_shroud = 1;   // 0=off, 1=shroud over cable opening
 use_v340l        = 0;   // 0=V620 (tested), 1=V340L slot sizing
 
-wallThickness = 1.8;
+wallThickness = 1.37;
 
 // Card slot (GPU fit)
 // V620: as built, card-tested. V340L: the cavity grips the cooler shroud
@@ -68,13 +68,12 @@ wt_outer = wallThickness * 2.5;    // shell margin (width, height)
 wt_depth = wallThickness * 2;      // shell margin (depth)
 wt_gap   = wallThickness * 1.5;    // clearance gap (fan inner, ramp)
 
-outerWidth  = innerWidth  + wt_outer;
+outerWidth  = innerWidth  + wt_outer + 1;
 outerDepth  = innerDepth  + wt_depth;
 outerHeight = innerHeight + wt_outer;
 
-fanOuterWidth = fanWidth + wt_depth;
+fanOuterWidth = fanWidth + wt_depth + 0.5;
 fanInnerWidth = fanWidth - wt_gap;
-fanInnerOffset = -2;
 
 pcie_8pin_x  = 20.5;                  // X offset from centerline
 pcie_8pin_d  = [38.66, 11.5, 14];     // [width, depth, height]
@@ -127,7 +126,7 @@ difference(){
 								translate([0, ramp_start_y, ramp_start_z])
 										cube(lowerRedirect + [-2, 0, 0], center = true);
 								translate([0, ramp_end_y, ramp_end_z])
-										cube(lowerRedirectB - [8, 0, 0], center = true);
+										cube(lowerRedirectB - [8 + ( use_90deg == 1 ? 1 : 0), 0, 0], center = true);
 						}
         }
         difference(){
@@ -146,7 +145,7 @@ difference(){
 
 					// Cutouts
 					union(){
-
+					
 						// Card opening
 						cube([innerWidth, outerDepth * 1.01, innerHeight], center = true);
 
@@ -175,7 +174,7 @@ difference(){
 									translate([-20, 0, 0])
 										cylinder(h=1, r=19, center=true);
 									translate([15, 0, 0])
-										cylinder(h=1, r=5, center=true);
+										cylinder(h=1, r=4, center=true);
 								}
 							}
 							hull(){
@@ -186,7 +185,7 @@ difference(){
 								translate([0, 0, -fanHeight/2])
 								hull(){
 									translate([-15, 0, 0])
-										cylinder(h=1, r=5, center=true);
+										cylinder(h=1, r=4, center=true);
 									translate([20, 0, 0])
 										cylinder(h=1, r=19, center=true);
 								}
@@ -208,7 +207,6 @@ difference(){
 								translate([0, 0, -fanHeight/2])
 									cube([fanInnerWidth, use_dual_40 ? fanInnerWidth/2 - 1 : fanInnerWidth, 1], center = true);
 									
-
 							}
 							if (flip == 1){
 								translate([0, -innerDepth/2 - wallThickness, 5.5+ductLiftZ])
@@ -220,17 +218,21 @@ difference(){
         }
 				
 				// Cable Shroud		
-				translate([0, (use_v340l == 1 ? -1 : 0), (use_v340l == 1 ? 1.5 : 0)])
+				if (use_cable_shroud == 1)
+				translate([0, (use_dual_40 == 1 ? -0.63 : 0), (use_v340l == 1 && use_dual_40 == 1 ? 2.5 : 0)])
 				hull(){
-						translate([pcie_8pin_x, -innerDepth - 11, -innerDepth/2 - 8.3])
-								cube(pcie_8pin_db + [-9+wallThickness*2, 0, 0], center = true);
-						translate([pcie_8pin_x, -innerDepth + 2, -innerDepth/2 + 1.05])
-								cube(pcie_8pin_db + [wallThickness*2, 8, -1+wallThickness], center = true);
+						translate([pcie_8pin_x, -innerDepth - 12, -innerDepth/2 - 8.3 - (use_v340l == 1 && use_dual_40 == 0 ? 3 : 0)])
+								cube(pcie_8pin_db + [-9+wallThickness*2, (use_v340l == 1 && use_dual_40 == 0 ? 10 : 0), 0], center = true);
+						translate([pcie_8pin_x, -innerDepth + (use_dual_40 == 1 ? 2.75 : 2), -innerDepth/2 + 1.05])
+								cube(pcie_8pin_db + [wallThickness*2, (use_dual_40 == 1 ? 9.75 : (use_v340l == 1 && use_dual_40 == 0 ? 11 : 8)), -1+wallThickness], center = true);
 						translate([pcie_8pin_x, -innerDepth -2, -innerDepth/2 - 8])
 								cube(pcie_8pin_db + [wallThickness*2, 10, 0], center = true);
 				}
     }
     union(){
+		
+				// Cutaway (for thickness checks)
+				//cube([20,200,200], center=true);
 
         // 45° ramp cutout
         cubert = (use_v340l == 1 ? 9.2 : 7.3);
@@ -246,15 +248,30 @@ difference(){
                 cube([innerWidth, 1, innerHeight] + [wallThickness, 0, wallThickness], center = true);
         }
 
-        // 8-pin slot
+        // 8-pin slots
         if (flip == 0){
-            hull(){
-                translate([pcie_8pin_x, -innerDepth + 1, -innerDepth/2 - 12])
-                    cube(pcie_8pin_d + [0, -10, 5.01], center = true);
-                translate([pcie_8pin_x, -innerDepth - 35, cutout_end_z])
-                    cube(pcie_8pin_db + [0, 4, 4], center = true);
-            }
-            translate([0, 0, 2])
+				
+						// Cable Channels
+						if (use_dual_40 == 1){
+							hull(){
+								translate([pcie_8pin_x + 11, -innerDepth + 6, -innerDepth/2 - 20])
+									cube(pcie_8pin_d + [200, -10, 0.01], center = true);
+								translate([pcie_8pin_x + 10, -innerDepth - 4.55, -innerDepth/2 - (use_v340l == 1 ? 10 : 12)])
+									cube(pcie_8pin_d + [200, -11, 1.764], center = true);
+								translate([pcie_8pin_x + 10, -innerDepth - 52, cutout_end_z])
+									cube(pcie_8pin_db + [200, 4, 4], center = true);
+							}
+						}
+						else {							
+							hull(){
+									translate([pcie_8pin_x, -innerDepth + 1, -innerDepth/2 - 12 - (use_75deg == 1 || use_90deg == 1 ? 1 : 0)])
+											cube(pcie_8pin_d + [0, -10, 5.01], center = true);
+									translate([pcie_8pin_x, -innerDepth - 44, cutout_end_z - (use_75deg == 1 || use_90deg == 1 ? 1.5 : 0)])
+											cube(pcie_8pin_db, center = true);
+							}
+						}
+            // PCIE 8 Pin x 2 Connector Clearance
+						translate([0, 0, 2])
             hull(){
                 translate([pcie_8pin_x, -innerDepth + 1.5, -innerDepth/2 - 5])
                     cube(pcie_8pin_d + [0, -11, -10.01], center = true);
@@ -262,8 +279,8 @@ difference(){
                     cube(pcie_8pin_d + [0, -3, (use_v340l == 1 ? -8.01 : -12.01)], center = true);
 								translate([pcie_8pin_x, -innerDepth + 4.5, -innerDepth/2 - 5])
                     cube(pcie_8pin_d + [-9, -2, -4.01], center = true);
-								translate([pcie_8pin_x, -innerDepth-3 - (use_v340l == 1 ? 4 : 0), -innerDepth/2 - 10 - (use_v340l == 1 ? 2 : 0)])
-                    cube(pcie_8pin_d + [-9, 4, -12.01], center = true);
+								translate([pcie_8pin_x, -innerDepth-3 - (use_v340l == 1 ? 5 : 0), -innerDepth/2 - 11 - (use_v340l == 1 ? 1 : 0) - (use_75deg == 1 || use_90deg == 1 ? 1.5 : 0)])
+                    cube(pcie_8pin_d + [-6, 4, -12.01], center = true);
             }
             translate([0, -6, 0])
             hull(){

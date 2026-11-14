@@ -12,20 +12,28 @@ shroud.
 
 ## Status
 
-- Last verified: 2026-10-25 (build)
+- Last verified: 2026-11-14 (build)
 - OpenSCAD version: see the [root README](../../README.md)
-- Physically tested: yes, including the V620 fit and both 8-pin power plugs
+- Physically tested: yes — the V620 fit, both 8-pin power plugs, the V340L
+  fit, and the single-slot version in a dual-GPU (two cards side by side)
+  setup
 
 ## Compatibility
 
 | Card | Fit |
 |---|---|
 | Radeon PRO V620 | Tested |
-| Radeon PRO V340L | Confirmed to work; needs adjusted sizing (same heatsink opening) |
+| Radeon PRO V340L | Tested |
 | Instinct MI50 / MI100 | May fit with tweaks; check the heatsink opening and screw bosses |
 
 The shroud grips the stock heatsink opening by friction. It does not screw to
 the card.
+
+The single-slot (2× 40 mm) version is tested in a dual-GPU setup with two
+cards side by side. The shell walls are thinned to 1.37 mm so the shrouds
+clear the PCIe slots in that layout — this also trimmed roughly 40 minutes
+off the dual-40 print time and removed internal void spaces. The dual-40
+variant received improved cable routing for the power connectors.
 
 ## Fans
 
@@ -48,18 +56,19 @@ increase only if the card is still throttling.
 | `80mm_75` | 1× 80 mm, 75° | Shallower fan angle |
 | `80mm_60` | 1× 80 mm, 60° | Shallower fan angle |
 | `80mm_45` | 1× 80 mm, 45° | Lowest-profile 80 mm angle |
-| `single_slot_40` | 2× 40 mm | Single-slot alternate, S4028-15K |
+| `single_slot_40` | 2× 40 mm | Single-slot alternate, S4028-15K, improved cable routing |
 
 ## Dimensions
 
 | Item | Size |
 |---|---|
-| Primary (90°) | 104.0 x 83.5 x 79.0 mm (45° variant is tallest at 105.6 mm) |
-| Card opening | about 99.3–99.5 x 38.4 mm, 18 mm deep |
-| Airflow duct opening | about 91.5 x 38 mm (single-slot version: about 26 mm tall) |
+| Primary (90°) | 103.7 x 82.9 x 78.7 mm (45° variant is tallest at 105.0 mm) |
+| Card opening (V620) | about 99.3–99.5 x 38.4 mm, 18 mm deep |
+| Card opening (V340L option) | 97 x 39.3 mm cavity, 98.8 mm PCB relief band |
+| Airflow duct opening | about 92 x 37 mm (single-slot version: about 25 mm tall) |
 | 8-pin power cutout | 38.7 x 11.5 mm, 14 mm deep |
 | 80 mm fan opening | about 80 mm wide, 8 mm deep |
-| 40 mm fan openings (single-slot) | about 40 x 80 mm each, 20 mm deep |
+| 40 mm fan openings (single-slot) | about 40 x 80 mm each, 14 mm deep |
 
 Other fan angles (75/60/45°) and the single-slot version have slightly
 different overall sizes.
@@ -92,8 +101,6 @@ python scripts/render_previews.py models/v620-fan-shroud --all
 ## Known issues
 
 - The MI50 and MI100 fits have not been physically tested.
-- The V340L fit is confirmed to work, but the source here is dimensioned for
-  the V620; a V340L build needs adjusted sizing.
 - The 40 mm version requires the higher-speed S4028-15K; the S4028-6K is not
   recommended.
 
